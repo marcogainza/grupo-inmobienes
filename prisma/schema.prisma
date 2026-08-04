@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Entrega {
+  id             String   @id @default(cuid())
+  clientName     String
+  city           String
+  propertyType   String
+  neighborhood   String?
+  deliveredAt    DateTime
+  photoUrl       String?
+  notarized      Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([deliveredAt])
+}
+
+model Testimonio {
+  id           String   @id @default(cuid())
+  clientName   String
+  comment      String
+  city         String
+  propertyType String
+  photoUrl     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model BlogPost {
+  id             String    @id @default(cuid())
+  title          String
+  slug           String    @unique
+  excerpt        String
+  content        String
+  coverImageUrl  String?
+  published      Boolean   @default(true)
+  publishedAt    DateTime  @default(now())
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+// Singleton row (id fixed to "main") holding every editable number on the public /dashboard page
+// and the hero counters on the home page.
+model DashboardStat {
+  id                       String   @id @default("main")
+  lastClientName           String   @default("")
+  lastClientCity           String   @default("")
+  lastClientPlan           String   @default("")
+  lastClientDate           DateTime @default(now())
+  newClientsThisMonth      Int      @default(0)
+  newClientsGrowthPct      Int      @default(0)
+  bienesEntregados         Int      @default(0)
+  asambleasEjecutadas      Int      @default(0)
+  inmueblesEntregados      Int      @default(0)
+  montoPromedioAdjudicado  Int      @default(0)
+  familiasAdjudicadas      Int      @default(0)
+  ciudadesAlcanzadas       Int      @default(0)
+  aniosExperiencia         Int      @default(0)
+  updatedAt                DateTime @updatedAt
+}
+
+model MonthlyAffiliation {
+  id     String @id @default(cuid())
+  month  String @unique // formato "YYYY-MM"
+  count  Int    @default(0)
+  order  Int    @default(0)
+}
+
+model MonthlyDelivery {
+  id     String @id @default(cuid())
+  month  String @unique // formato "YYYY-MM"
+  count  Int    @default(0)
+  order  Int    @default(0)
+}
+
+model CityStat {
+  id      String @id @default(cuid())
+  city    String @unique
+  count   Int    @default(0)
+  order   Int    @default(0)
+}

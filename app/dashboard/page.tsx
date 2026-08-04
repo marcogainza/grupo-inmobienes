@@ -1,0 +1,212 @@
+import Link from "next/link";
+import { prisma } from "@/lib/db";
+import StatCard from "@/components/dashboard/StatCard";
+import ClientesAfiliadosChart from "@/components/dashboard/ClientesAfiliadosChart";
+import EntregasMensualesChart from "@/components/dashboard/EntregasMensualesChart";
+import ClientesPorCiudadChart from "@/components/dashboard/ClientesPorCiudadChart";
+import { monthLabel } from "@/lib/dates";
+
+export const metadata = {
+  title: "Dashboard — Grupo Inmobienes",
+};
+
+export const dynamic = "force-dynamic";
+
+const dateFmt = new Intl.DateTimeFormat("es-EC", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
+const currency = new Intl.NumberFormat("es-EC", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .map((p) => p[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
+
+export default async function DashboardPage() {
+  const [stat, affiliations, deliveries, cityStats, entregas] =
+    await Promise.all([
+      prisma.dashboardStat.upsert({
+        where: { id: "main" },
+        update: {},
+        create: { id: "main" },
+      }),
+      prisma.monthlyAffiliation.findMany({ orderBy: { order: "asc" } }),
+      prisma.monthlyDelivery.findMany({ orderBy: { order: "asc" } }),
+      prisma.cityStat.findMany({ orderBy: { order: "asc" } }),
+      prisma.entrega.findMany({ orderBy: { deliveredAt: "desc" }, take: 3 }),
+    ]);
+
+  const affiliationData = affiliations.map((a) => ({
+    label: monthLabel(a.month),
+    count: a.count,
+  }));
+  const deliveryData = deliveries.map((d) => ({
+    label: monthLabel(d.month),
+    count: d.count,
+  }));
+  const cityData = cityStats.map((c) => ({ city: c.city, count: c.count }));
+
+  return (
+    <div className="min-h-full bg-slate-50">
+      <header className="border-b border-slate-200 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+          <Link
+            href="/"
+            className="text-sm font-medium text-emerald-600 hover:underline"
+          >
+            ← Volver al inicio
+          </Link>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-emerald-600">
+            Transparencia total
+          </p>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
+            Nuestro Crecimiento en Tiempo Real
+          </h1>
+          <p className="mt-2 max-w-2xl text-slate-600">
+            Datos actualizados de nuestra operación. Porque en Grupo
+            Inmobienes, la confianza se construye con transparencia.
+          </p>
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+              Último cliente
+            </p>
+            <div className="mt-3 flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">
+                {stat.lastClientName ? initials(stat.lastClientName) : "—"}
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-slate-900">
+                  {stat.lastClientName || "Sin datos"} —{" "}
+                  {stat.lastClientCity}
+                </p>
+                <p className="flex items-center gap-1 text-xs text-emerald-600">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  Reciente
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <StatCard
+            label="Nuevos clientes este mes"
+            value={String(stat.newClientsThisMonth)}
+            hint={`↑ +${stat.newClientsGrowthPct}% vs mes anterior`}
+          />
+          <StatCard
+            label="Bienes entregados"
+            value={String(stat.bienesEntregados)}
+            hint="↑ Actualizando en tiempo real"
+            icon="📦"
+          />
+          <StatCard
+            label="Asambleas ejecutadas"
+            value={String(stat.asambleasEjecutadas)}
+            hint="Grupos de adjudicación completados"
+            icon="🔄"
+          />
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p className="text-sm font-semibold text-slate-900">
+              Nuevos clientes
+            </p>
+            <div className="mt-4 rounded-xl bg-slate-50 p-4">
+              {stat.lastClientName ? (
+                <>
+                  <p className="text-sm text-slate-700">
+                    {stat.lastClientName} de {stat.lastClientCity} se unió al{" "}
+                    {stat.lastClientPlan || "plan"}
+                  </p>
+                  <p className="mt-1 text-xs text-slate-400">
+                    {dateFmt.format(stat.lastClientDate)}
+                  </p>
+                </>
+              ) : (
+                <p className="text-sm text-slate-400">Sin datos aún.</p>
+              )}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p className="text-sm font-semibold text-slate-900">
+              Entregas recientes
+            </p>
+            <div className="mt-4 space-y-3">
+              {entregas.length === 0 && (
+                <p className="text-sm text-slate-400">Sin datos aún.</p>
+              )}
+              {entregas.map((e) => (
+                <div key={e.id} className="rounded-xl bg-slate-50 p-3">
+                  <p className="text-sm text-slate-700">
+                    {e.clientName} recibió su {e.propertyType.toLowerCase()}
+                  </p>
+                  <p className="mt-1 text-xs text-slate-400">
+                    {dateFmt.format(e.deliveredAt)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <p className="text-sm font-semibold text-slate-900">
+            Clientes Afiliados — Últimos 12 meses
+          </p>
+          <div className="mt-4">
+            <ClientesAfiliadosChart data={affiliationData} />
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p className="text-sm font-semibold text-slate-900">
+              Entregas mensuales
+            </p>
+            <div className="mt-4">
+              <EntregasMensualesChart data={deliveryData} />
+            </div>
+          </div>
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p className="text-sm font-semibold text-slate-900">
+              Clientes por ciudad
+            </p>
+            <div className="mt-4">
+              <ClientesPorCiudadChart data={cityData} />
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <StatCard
+            label="Inmuebles entregados"
+            value={`+${stat.inmueblesEntregados}`}
+            hint="familias adjudicadas"
+          />
+          <StatCard
+            label="Monto promedio adjudicado"
+            value={currency.format(stat.montoPromedioAdjudicado)}
+            hint="por bien inmueble"
+          />
+        </div>
+      </main>
+    </div>
+  );
+}
