@@ -59,6 +59,7 @@ async function main() {
             "Gracias a dios tuve la oportunidad de poderlos conocer a ustedes, usamos el beneficio para adquirir una vivienda, el objetivo también fue ampliar y remodelar.",
           city: "Quito",
           propertyType: "Departamento",
+          photoUrl: "/freddy.jpg",
         },
         {
           clientName: "Margarita Reviera",
@@ -66,6 +67,7 @@ async function main() {
             "Recibí las llaves y las escrituras de mi casa gracias a Inmobienes, fue una experiencia muy buena.",
           city: "Quito",
           propertyType: "Departamento",
+          photoUrl: "/margarita.jpg",
         },
         {
           clientName: "Viviana Reyes",
@@ -73,6 +75,7 @@ async function main() {
             "Muchas gracias a todo el equipo. Los recomiendo porque hicieron que este proceso fuera muy fácil y hoy puedo decir que tengo mi casa.",
           city: "Guayaquil",
           propertyType: "Casa",
+          photoUrl: "/viviana.jpg",
         },
       ],
     });

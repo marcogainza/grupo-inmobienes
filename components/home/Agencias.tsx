@@ -1,3 +1,4 @@
+import Image from "next/image";
 import SectionEyebrow from "./SectionEyebrow";
 
 const AGENCIAS = [
@@ -5,11 +6,13 @@ const AGENCIAS = [
     city: "Quito",
     address: "Av. Los Shyris e Isla Floreana",
     detail: "Local esquinero",
+    photo: "/quito.jpg",
   },
   {
     city: "Guayaquil",
     address: "Alborada, etapa II, villa 12, Mz. 21",
     detail: "Frente a Créditos Económicos",
+    photo: "/gye.jpg",
   },
 ];
 
@@ -26,21 +29,32 @@ export default function Agencias() {
           {AGENCIAS.map((a) => (
             <div
               key={a.city}
-              className="rounded-2xl border border-slate-200 bg-white p-8"
+              className="overflow-hidden rounded-2xl border border-slate-200 bg-white"
             >
-              <h3 className="text-xl font-bold text-slate-900">{a.city}</h3>
-              <p className="mt-2 text-slate-600">{a.address}</p>
-              <p className="text-sm text-slate-400">{a.detail}</p>
-              <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                  `${a.address}, ${a.city}, Ecuador`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-block text-sm font-semibold text-emerald-600 hover:underline"
-              >
-                Cómo llegar →
-              </a>
+              <Image
+                src={a.photo}
+                alt={`Agencia ${a.city}`}
+                width={600}
+                height={320}
+                className="h-48 w-full object-cover"
+              />
+              <div className="p-8">
+                <h3 className="text-xl font-bold text-slate-900">
+                  {a.city}
+                </h3>
+                <p className="mt-2 text-slate-600">{a.address}</p>
+                <p className="text-sm text-slate-400">{a.detail}</p>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                    `${a.address}, ${a.city}, Ecuador`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-block text-sm font-semibold text-blue-accent hover:underline"
+                >
+                  Cómo llegar →
+                </a>
+              </div>
             </div>
           ))}
         </div>

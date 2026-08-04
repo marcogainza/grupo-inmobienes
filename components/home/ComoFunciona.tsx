@@ -56,7 +56,7 @@ export default function ComoFunciona() {
         <div className="mt-10 text-center">
           <a
             href="#contacto"
-            className="inline-block rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-600"
+            className="inline-block rounded-full bg-gold/100 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gold-dark"
           >
             Quiero comenzar mi plan
           </a>

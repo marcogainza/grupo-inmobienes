@@ -63,11 +63,11 @@ export default async function DashboardPage() {
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
           <Link
             href="/"
-            className="text-sm font-medium text-emerald-600 hover:underline"
+            className="text-sm font-medium text-blue-accent hover:underline"
           >
             ← Volver al inicio
           </Link>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-emerald-600">
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-blue-accent">
             Transparencia total
           </p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
@@ -87,7 +87,7 @@ export default async function DashboardPage() {
               Último cliente
             </p>
             <div className="mt-3 flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/15 text-sm font-bold text-navy">
                 {stat.lastClientName ? initials(stat.lastClientName) : "—"}
               </div>
               <div>
@@ -95,8 +95,8 @@ export default async function DashboardPage() {
                   {stat.lastClientName || "Sin datos"} —{" "}
                   {stat.lastClientCity}
                 </p>
-                <p className="flex items-center gap-1 text-xs text-emerald-600">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <p className="flex items-center gap-1 text-xs text-blue-accent">
+                  <span className="h-1.5 w-1.5 rounded-full bg-gold/100" />
                   Reciente
                 </p>
               </div>

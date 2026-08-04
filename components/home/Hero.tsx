@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type HeroProps = {
   familiasAdjudicadas: number;
   ciudadesAlcanzadas: number;
@@ -16,10 +18,24 @@ export default function Hero({
   ];
 
   return (
-    <section className="relative overflow-hidden bg-slate-950 text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-28">
+    <section className="relative overflow-hidden bg-navy text-white">
+      <Image
+        src="/local-0.jpg"
+        alt=""
+        fill
+        priority
+        className="object-cover"
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(27,44,66,0.92) 0%, rgba(27,44,66,0.75) 55%, rgba(27,44,66,0.4) 100%)",
+        }}
+      />
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-28">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-emerald-300">
+          <span className="inline-flex items-center gap-2 rounded-full bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-gold">
             🏢 Tu meta inmobiliaria, planificada
           </span>
           <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
@@ -34,7 +50,7 @@ export default function Hero({
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="#contacto"
-              className="rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+              className="rounded-full bg-gold/100 px-6 py-3 text-sm font-semibold text-navy transition hover:bg-gold-dark"
             >
               Comenzar ahora
             </a>
@@ -54,14 +70,14 @@ export default function Hero({
 
         <div className="flex justify-center lg:justify-end">
           <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/5 p-8 text-center shadow-2xl backdrop-blur">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/20 text-2xl">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gold/20 text-2xl">
               🔒
             </div>
-            <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-emerald-300">
+            <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-gold">
               Inversión asegurada
             </p>
             <p className="mt-2 text-xl font-bold">
-              Grupo <span className="text-emerald-400">INMOBIENES</span>
+              Grupo <span className="text-gold">INMOBIENES</span>
             </p>
           </div>
         </div>
@@ -71,7 +87,7 @@ export default function Hero({
         <div className="mx-auto grid max-w-7xl grid-cols-3 gap-4 px-4 py-8 text-center sm:px-6">
           {stats.map((stat) => (
             <div key={stat.label}>
-              <p className="text-2xl font-bold text-emerald-400 sm:text-3xl">
+              <p className="text-2xl font-bold text-gold sm:text-3xl">
                 +{stat.value}
               </p>
               <p className="mt-1 text-xs text-slate-300 sm:text-sm">

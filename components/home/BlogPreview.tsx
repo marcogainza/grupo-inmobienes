@@ -70,7 +70,7 @@ export default function BlogPreview({ posts }: { posts: Post[] }) {
         <div className="mt-10 text-center">
           <Link
             href="/blog"
-            className="inline-block rounded-full border border-emerald-500 px-6 py-3 text-sm font-semibold text-emerald-600 transition hover:bg-emerald-50"
+            className="inline-block rounded-full border border-gold px-6 py-3 text-sm font-semibold text-blue-accent transition hover:bg-gold/10"
           >
             Ver todas las noticias
           </Link>

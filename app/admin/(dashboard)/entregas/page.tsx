@@ -139,7 +139,7 @@ export default async function AdminEntregasPage({
         <div className="sm:col-span-2 flex items-center gap-3">
           <button
             type="submit"
-            className="rounded-full bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-white hover:bg-emerald-600"
+            className="rounded-full bg-gold/100 px-6 py-2.5 text-sm font-semibold text-white hover:bg-gold-dark"
           >
             {editing ? "Guardar cambios" : "Añadir entrega"}
           </button>
@@ -187,7 +187,7 @@ export default async function AdminEntregasPage({
             <div className="flex items-center gap-3">
               <a
                 href={`/admin/entregas?edit=${e.id}`}
-                className="text-sm font-medium text-emerald-600 hover:underline"
+                className="text-sm font-medium text-blue-accent hover:underline"
               >
                 Editar
               </a>

@@ -19,7 +19,7 @@ export default function StatCard({
       </div>
       <p className="mt-2 text-3xl font-bold text-slate-900">{value}</p>
       {hint && (
-        <p className="mt-1 text-xs font-medium text-emerald-600">{hint}</p>
+        <p className="mt-1 text-xs font-medium text-blue-accent">{hint}</p>
       )}
     </div>
   );

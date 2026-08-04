@@ -37,7 +37,7 @@ export default function LoginForm() {
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-full bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-60"
+        className="w-full rounded-full bg-gold/100 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-gold-dark disabled:opacity-60"
       >
         {pending ? "Ingresando…" : "Iniciar sesión"}
       </button>

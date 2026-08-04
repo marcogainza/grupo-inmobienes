@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getSession, clearSessionCookie } from "@/lib/session";
@@ -31,10 +32,14 @@ export default async function AdminLayout({
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:flex-row">
         <aside className="lg:w-64 lg:shrink-0">
           <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-            <p className="px-2 text-sm font-bold text-slate-900">
-              Grupo <span className="text-emerald-600">INMOBIENES</span>
-            </p>
-            <p className="px-2 text-xs text-slate-400">
+            <Image
+              src="/logo-inmo-azul.png"
+              alt="Grupo Inmobienes"
+              width={140}
+              height={30}
+              className="h-7 w-auto px-2"
+            />
+            <p className="mt-2 px-2 text-xs text-slate-400">
               Sesión: {session.username}
             </p>
             <nav className="mt-4 flex flex-row gap-1 overflow-x-auto lg:flex-col lg:overflow-visible">
@@ -59,7 +64,7 @@ export default async function AdminLayout({
             <Link
               href="/"
               target="_blank"
-              className="mt-2 block px-2 text-xs font-medium text-emerald-600 hover:underline"
+              className="mt-2 block px-2 text-xs font-medium text-blue-accent hover:underline"
             >
               Ver sitio público ↗
             </Link>

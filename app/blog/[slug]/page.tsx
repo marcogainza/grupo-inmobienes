@@ -33,7 +33,7 @@ export default async function BlogPostPage({
         <article className="mx-auto max-w-3xl px-4 sm:px-6">
           <Link
             href="/blog"
-            className="text-sm font-medium text-emerald-600 hover:underline"
+            className="text-sm font-medium text-blue-accent hover:underline"
           >
             ← Volver al blog
           </Link>

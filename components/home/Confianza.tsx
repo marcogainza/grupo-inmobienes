@@ -28,7 +28,7 @@ const ITEMS = [
 
 export default function Confianza() {
   return (
-    <section className="bg-slate-950 py-20 text-white">
+    <section className="bg-navy py-20 text-white">
       <div className="mx-auto max-w-7xl px-4 text-center sm:px-6">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Somos una empresa ecuatoriana comprometida con tu futuro

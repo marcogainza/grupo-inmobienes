@@ -56,7 +56,7 @@ export default function Testimonios({
                       className="h-11 w-11 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/15 text-sm font-bold text-navy">
                       {initials(t.clientName)}
                     </div>
                   )}

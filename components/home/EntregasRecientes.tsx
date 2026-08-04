@@ -65,7 +65,7 @@ export default function EntregasRecientes({
                       className="h-14 w-14 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-lg font-bold text-emerald-700">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gold/15 text-lg font-bold text-navy">
                       {initials(e.clientName)}
                     </div>
                   )}
@@ -80,7 +80,7 @@ export default function EntregasRecientes({
                   </div>
                 </div>
                 <div className="border-t border-slate-100 px-6 py-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-emerald-600">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-blue-accent">
                     {e.propertyType}
                   </p>
                   {e.neighborhood && (
@@ -103,7 +103,7 @@ export default function EntregasRecientes({
           </p>
           <a
             href="#contacto"
-            className="mt-4 inline-block rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-600"
+            className="mt-4 inline-block rounded-full bg-gold/100 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gold-dark"
           >
             Comenzar mi plan ahora
           </a>

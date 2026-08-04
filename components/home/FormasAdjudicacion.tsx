@@ -30,8 +30,8 @@ export default function FormasAdjudicacion() {
             </ul>
           </div>
 
-          <div className="relative rounded-2xl border-2 border-emerald-500 bg-white p-8">
-            <span className="absolute -top-3 right-6 rounded-full bg-emerald-500 px-3 py-1 text-xs font-bold text-white">
+          <div className="relative rounded-2xl border-2 border-gold bg-white p-8">
+            <span className="absolute -top-3 right-6 rounded-full bg-gold/100 px-3 py-1 text-xs font-bold text-white">
               RECOMENDADO
             </span>
             <h3 className="text-xl font-bold text-slate-900">Licitación</h3>

@@ -1,13 +1,13 @@
+import Image from "next/image";
 import SectionEyebrow from "./SectionEyebrow";
 import { PROPERTY_TYPES } from "@/lib/constants";
 
-const ICONS: Record<string, string> = {
-  Casa: "🏡",
-  Departamento: "🏢",
-  Terreno: "🌳",
-  "Proyecto inmobiliario": "🏗️",
-  "Local comercial": "🏬",
-  Vehículo: "🚗",
+const PHOTOS: Record<string, string> = {
+  Casa: "/local-1.jpg",
+  Departamento: "/venucia.png",
+  Terreno: "/terreno-0.png",
+  "Proyecto inmobiliario": "/local-3.jpg",
+  "Local comercial": "/local-2.jpg",
 };
 
 export default function Catalogo() {
@@ -24,17 +24,32 @@ export default function Catalogo() {
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {PROPERTY_TYPES.map((type) => (
-            <div
-              key={type}
-              className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-6"
-            >
-              <span className="text-3xl">{ICONS[type] ?? "🏠"}</span>
-              <span className="text-lg font-semibold text-slate-900">
-                {type}
-              </span>
-            </div>
-          ))}
+          {PROPERTY_TYPES.map((type) => {
+            const photo = PHOTOS[type];
+            return (
+              <div
+                key={type}
+                className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50"
+              >
+                {photo ? (
+                  <Image
+                    src={photo}
+                    alt={type}
+                    width={400}
+                    height={220}
+                    className="h-40 w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-40 items-center justify-center bg-navy/5 text-4xl">
+                    🚗
+                  </div>
+                )}
+                <p className="p-4 text-lg font-semibold text-slate-900">
+                  {type}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

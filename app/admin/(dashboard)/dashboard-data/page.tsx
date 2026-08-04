@@ -195,7 +195,7 @@ export default async function AdminDashboardDataPage() {
         <div className="sm:col-span-2 lg:col-span-3">
           <button
             type="submit"
-            className="rounded-full bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-white hover:bg-emerald-600"
+            className="rounded-full bg-gold/100 px-6 py-2.5 text-sm font-semibold text-white hover:bg-gold-dark"
           >
             Guardar cifras
           </button>
@@ -228,7 +228,7 @@ export default async function AdminDashboardDataPage() {
         </div>
         <button
           type="submit"
-          className="mt-4 rounded-full bg-emerald-500 px-6 py-2 text-sm font-semibold text-white hover:bg-emerald-600"
+          className="mt-4 rounded-full bg-gold/100 px-6 py-2 text-sm font-semibold text-white hover:bg-gold-dark"
         >
           Guardar serie
         </button>
@@ -260,7 +260,7 @@ export default async function AdminDashboardDataPage() {
         </div>
         <button
           type="submit"
-          className="mt-4 rounded-full bg-emerald-500 px-6 py-2 text-sm font-semibold text-white hover:bg-emerald-600"
+          className="mt-4 rounded-full bg-gold/100 px-6 py-2 text-sm font-semibold text-white hover:bg-gold-dark"
         >
           Guardar serie
         </button>
@@ -289,7 +289,7 @@ export default async function AdminDashboardDataPage() {
               />
               <button
                 type="submit"
-                className="rounded-full bg-emerald-500 px-4 py-1.5 text-xs font-semibold text-white hover:bg-emerald-600"
+                className="rounded-full bg-gold/100 px-4 py-1.5 text-xs font-semibold text-white hover:bg-gold-dark"
               >
                 Guardar
               </button>
@@ -316,7 +316,7 @@ export default async function AdminDashboardDataPage() {
           />
           <button
             type="submit"
-            className="rounded-full border border-emerald-500 px-4 py-2 text-sm font-semibold text-emerald-600 hover:bg-emerald-50"
+            className="rounded-full border border-gold px-4 py-2 text-sm font-semibold text-blue-accent hover:bg-gold/10"
           >
             + Añadir ciudad
           </button>

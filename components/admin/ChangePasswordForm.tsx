@@ -35,7 +35,7 @@ export default function ChangePasswordForm() {
         <p className="text-sm font-medium text-red-600">{state.error}</p>
       )}
       {state?.success && (
-        <p className="text-sm font-medium text-emerald-600">
+        <p className="text-sm font-medium text-blue-accent">
           {state.success}
         </p>
       )}

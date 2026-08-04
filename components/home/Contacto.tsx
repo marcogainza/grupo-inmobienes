@@ -27,11 +27,11 @@ export default function Contacto() {
         </div>
 
         {enviado ? (
-          <div className="mt-10 rounded-2xl border border-emerald-200 bg-emerald-50 p-8 text-center">
-            <p className="text-lg font-semibold text-emerald-700">
+          <div className="mt-10 rounded-2xl border border-gold/30 bg-gold/10 p-8 text-center">
+            <p className="text-lg font-semibold text-navy">
               ¡Gracias! Hemos recibido tu mensaje.
             </p>
-            <p className="mt-2 text-sm text-emerald-600">
+            <p className="mt-2 text-sm text-blue-accent">
               Un asesor se pondrá en contacto contigo muy pronto.
             </p>
           </div>
@@ -93,7 +93,7 @@ export default function Contacto() {
             </label>
             <button
               type="submit"
-              className="w-full rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-600"
+              className="w-full rounded-full bg-gold/100 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gold-dark"
             >
               Enviar mensaje
             </button>

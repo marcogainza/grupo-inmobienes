@@ -97,7 +97,7 @@ export default function Simulador() {
           <button
             type="button"
             onClick={calcular}
-            className="mt-6 w-full rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-600"
+            className="mt-6 w-full rounded-full bg-gold/100 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gold-dark"
           >
             Calcular cuota mensual
           </button>

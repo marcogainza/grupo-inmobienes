@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -18,12 +19,17 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-navy/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link href="/" className="flex items-center gap-2 text-white">
-          <span className="text-lg font-bold tracking-tight">
-            Grupo <span className="text-emerald-400">INMOBIENES</span>
-          </span>
+          <Image
+            src="/logo-inmo-blanco.png"
+            alt="Grupo Inmobienes"
+            width={160}
+            height={35}
+            className="h-8 w-auto"
+            priority
+          />
         </Link>
 
         <nav className="hidden items-center gap-5 lg:flex">
@@ -41,13 +47,13 @@ export default function Nav() {
         <div className="hidden items-center gap-3 md:flex">
           <Link
             href="/dashboard"
-            className="rounded-full border border-emerald-400/40 px-4 py-2 text-sm font-medium text-emerald-300 transition hover:bg-emerald-400/10"
+            className="rounded-full border border-gold/40 px-4 py-2 text-sm font-medium text-gold transition hover:bg-gold/10"
           >
             🤝 Transparencia
           </Link>
           <a
             href="#contacto"
-            className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+            className="rounded-full bg-gold/100 px-4 py-2 text-sm font-semibold text-navy transition hover:bg-gold-dark"
           >
             Comenzar ahora
           </a>
@@ -64,7 +70,7 @@ export default function Nav() {
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-slate-950 px-4 pb-4 lg:hidden">
+        <div className="border-t border-white/10 bg-navy px-4 pb-4 lg:hidden">
           <nav className="flex flex-col gap-3 pt-3">
             {LINKS.map((link) => (
               <a
@@ -78,14 +84,14 @@ export default function Nav() {
             ))}
             <Link
               href="/dashboard"
-              className="text-sm font-medium text-emerald-300"
+              className="text-sm font-medium text-gold"
             >
               🤝 Transparencia
             </Link>
             <a
               href="#contacto"
               onClick={() => setOpen(false)}
-              className="rounded-full bg-emerald-500 px-4 py-2 text-center text-sm font-semibold text-slate-950"
+              className="rounded-full bg-gold/100 px-4 py-2 text-center text-sm font-semibold text-navy"
             >
               Comenzar ahora
             </a>

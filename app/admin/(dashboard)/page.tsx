@@ -48,7 +48,7 @@ export default async function AdminOverviewPage() {
           <Link
             key={c.href}
             href={c.href}
-            className="rounded-xl border border-slate-200 p-5 transition hover:border-emerald-300 hover:bg-emerald-50/40"
+            className="rounded-xl border border-slate-200 p-5 transition hover:border-emerald-300 hover:bg-gold/10/40"
           >
             <p className="text-2xl font-bold text-slate-900">{c.value}</p>
             <p className="mt-1 text-sm font-semibold text-slate-700">

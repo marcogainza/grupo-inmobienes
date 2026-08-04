@@ -45,7 +45,7 @@ export default function FAQ() {
             <details key={item.q} className="group p-6">
               <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900 marker:content-none">
                 {item.q}
-                <span className="ml-4 text-emerald-600 transition group-open:rotate-45">
+                <span className="ml-4 text-blue-accent transition group-open:rotate-45">
                   +
                 </span>
               </summary>
