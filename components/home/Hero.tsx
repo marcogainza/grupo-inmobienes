@@ -18,7 +18,7 @@ type Slide = {
 
 const SLIDES: Slide[] = [
   {
-    bg: "/local-0.jpg",
+    bg: "/empresa-0.jpg",
     eyebrowIcon: "🏢",
     eyebrow: "Tu meta inmobiliaria, planificada",
     title: "Planificamos tu futuro inmobiliario",
@@ -27,7 +27,7 @@ const SLIDES: Slide[] = [
     badgeIcon: "🔒",
     badgeLabel: "Inversión asegurada",
     badgeValue: "Grupo INMOBIENES",
-    images: ["/local-1.jpg", "/local-2.jpg", "/local-3.jpg"],
+    images: ["/jaqueline.jpg", "/mario.jpg", "/fanny.jpg"],
   },
   {
     bg: "/local-1.jpg",
@@ -61,9 +61,21 @@ const SLIDES: Slide[] = [
       "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
     ],
   },
+  {
+    bg: "/terreno-0.png",
+    eyebrowIcon: "🌱",
+    eyebrow: "TERRENOS Y PROYECTOS",
+    title: "Construye tu patrimonio desde la base",
+    description:
+      "Adquiere el terreno ideal para tu próximo proyecto o vivienda. Invierte de manera segura, con plazos flexibles y aprobación inmediata, sin requisitos inalcanzables ni trámites burocráticos interminables.",
+    badgeIcon: "🌱",
+    badgeLabel: "Plan terreno",
+    badgeValue: "Desde $288.75/Mes",
+    images: ["/terreno-1.jpg", "/terreno-2.png", "/terreno-3.jpg"],
+  },
 ];
 
-const AUTO_ADVANCE_MS = 7000;
+const AUTO_ADVANCE_MS = 8000;
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
@@ -168,6 +180,7 @@ export default function Hero() {
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.06, y: -4 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="min-w-0"
                 >
@@ -176,12 +189,13 @@ export default function Hero() {
                     alt=""
                     width={200}
                     height={280}
-                    className="h-32 w-full rounded-2xl border-2 border-white/20 object-cover shadow-xl sm:h-44"
+                    className="h-32 w-full rounded-2xl border-2 border-white/20 object-cover shadow-xl transition-shadow duration-300 hover:shadow-2xl hover:border-gold/50 sm:h-44"
                   />
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.06, y: -6 }}
                   transition={{ duration: 0.5, delay: 0.35 }}
                   className="min-w-0"
                 >
@@ -190,12 +204,13 @@ export default function Hero() {
                     alt=""
                     width={220}
                     height={300}
-                    className="h-40 w-full rounded-2xl border-2 border-gold/60 object-cover shadow-2xl sm:h-56"
+                    className="h-40 w-full rounded-2xl border-2 border-gold/60 object-cover shadow-2xl transition-shadow duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.35)] sm:h-56"
                   />
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.06, y: -4 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="min-w-0"
                 >
@@ -204,7 +219,7 @@ export default function Hero() {
                     alt=""
                     width={200}
                     height={280}
-                    className="h-32 w-full rounded-2xl border-2 border-white/20 object-cover shadow-xl sm:h-44"
+                    className="h-32 w-full rounded-2xl border-2 border-white/20 object-cover shadow-xl transition-shadow duration-300 hover:shadow-2xl hover:border-gold/50 sm:h-44"
                   />
                 </motion.div>
               </div>

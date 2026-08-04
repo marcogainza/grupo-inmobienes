@@ -50,7 +50,7 @@ export default async function DashboardPage() {
       prisma.entrega.findMany({ orderBy: { deliveredAt: "desc" }, take: 3 }),
       prisma.clienteAfiliado.findMany({
         orderBy: { joinedAt: "desc" },
-        take: 5,
+        take: 6,
       }),
     ]);
 

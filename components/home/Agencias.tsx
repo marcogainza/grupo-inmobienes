@@ -28,11 +28,11 @@ export default function Agencias() {
           Visítanos en Quito o Guayaquil
         </h2>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+        <div className="mx-auto mt-12 grid max-w-2xl gap-6 sm:grid-cols-2">
           {AGENCIAS.map((a, i) => (
             <Reveal key={a.city} delay={i * 0.12}>
               <div className="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-                <div className="relative aspect-[4/5] w-full overflow-hidden">
+                <div className="relative aspect-[4/3] w-full overflow-hidden">
                   <Image
                     src={a.photo}
                     alt={`Agencia ${a.city}`}
@@ -40,7 +40,7 @@ export default function Agencias() {
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
-                <div className="p-8">
+                <div className="p-6">
                   <h3 className="text-xl font-bold text-slate-900">
                     {a.city}
                   </h3>

@@ -1,7 +1,51 @@
 import Image from "next/image";
 import { prisma } from "@/lib/db";
+import type { Testimonio } from "@prisma/client";
 import { PROPERTY_TYPES, CITIES } from "@/lib/constants";
 import { saveTestimonio, deleteTestimonio } from "./actions";
+
+function TestimonioRow({ t }: { t: Testimonio }) {
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-slate-200 p-4">
+      <div className="flex items-center gap-3">
+        {t.photoUrl && (
+          <Image
+            src={t.photoUrl}
+            alt={t.clientName}
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-full object-cover"
+          />
+        )}
+        <div>
+          <p className="text-sm font-semibold text-slate-900">
+            {t.clientName} · {t.city}
+          </p>
+          <p className="max-w-md truncate text-xs text-slate-500">
+            {t.comment}
+          </p>
+        </div>
+      </div>
+      <div className="flex items-center gap-3">
+        <a
+          href={`/admin/testimonios?edit=${t.id}`}
+          className="text-sm font-medium text-blue-accent hover:underline"
+        >
+          Editar
+        </a>
+        <form action={deleteTestimonio}>
+          <input type="hidden" name="id" value={t.id} />
+          <button
+            type="submit"
+            className="text-sm font-medium text-red-500 hover:underline"
+          >
+            Eliminar
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
 
 export default async function AdminTestimoniosPage({
   searchParams,
@@ -14,6 +58,8 @@ export default async function AdminTestimoniosPage({
     prisma.testimonio.findMany({ orderBy: { createdAt: "desc" } }),
     edit ? prisma.testimonio.findUnique({ where: { id: edit } }) : null,
   ]);
+  const visibles = testimonios.slice(0, 6);
+  const resto = testimonios.slice(6);
 
   return (
     <div className="space-y-8">
@@ -131,49 +177,22 @@ export default async function AdminTestimoniosPage({
         {testimonios.length === 0 && (
           <p className="text-sm text-slate-400">No hay testimonios todavía.</p>
         )}
-        {testimonios.map((t) => (
-          <div
-            key={t.id}
-            className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-slate-200 p-4"
-          >
-            <div className="flex items-center gap-3">
-              {t.photoUrl && (
-                <Image
-                  src={t.photoUrl}
-                  alt={t.clientName}
-                  width={44}
-                  height={44}
-                  className="h-11 w-11 rounded-full object-cover"
-                />
-              )}
-              <div>
-                <p className="text-sm font-semibold text-slate-900">
-                  {t.clientName} · {t.city}
-                </p>
-                <p className="max-w-md truncate text-xs text-slate-500">
-                  {t.comment}
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <a
-                href={`/admin/testimonios?edit=${t.id}`}
-                className="text-sm font-medium text-blue-accent hover:underline"
-              >
-                Editar
-              </a>
-              <form action={deleteTestimonio}>
-                <input type="hidden" name="id" value={t.id} />
-                <button
-                  type="submit"
-                  className="text-sm font-medium text-red-500 hover:underline"
-                >
-                  Eliminar
-                </button>
-              </form>
-            </div>
-          </div>
+        {visibles.map((t) => (
+          <TestimonioRow key={t.id} t={t} />
         ))}
+
+        {resto.length > 0 && (
+          <details className="rounded-xl border border-slate-200">
+            <summary className="cursor-pointer list-none p-4 text-sm font-medium text-blue-accent hover:underline">
+              Ver los {resto.length} testimonios restantes
+            </summary>
+            <div className="max-h-96 space-y-3 overflow-y-auto border-t border-slate-200 p-4">
+              {resto.map((t) => (
+                <TestimonioRow key={t.id} t={t} />
+              ))}
+            </div>
+          </details>
+        )}
       </div>
     </div>
   );

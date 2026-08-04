@@ -1,6 +1,53 @@
 import Image from "next/image";
 import { prisma } from "@/lib/db";
+import type { BlogPost } from "@prisma/client";
 import { saveBlogPost, deleteBlogPost } from "./actions";
+
+function BlogRow({ p }: { p: BlogPost }) {
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-slate-200 p-4">
+      <div className="flex items-center gap-3">
+        {p.coverImageUrl && (
+          <Image
+            src={p.coverImageUrl}
+            alt={p.title}
+            width={56}
+            height={56}
+            className="h-14 w-14 rounded-lg object-cover"
+          />
+        )}
+        <div>
+          <p className="text-sm font-semibold text-slate-900">
+            {p.title}{" "}
+            {!p.published && (
+              <span className="ml-1 rounded bg-slate-200 px-1.5 py-0.5 text-[10px] font-semibold text-slate-500">
+                BORRADOR
+              </span>
+            )}
+          </p>
+          <p className="text-xs text-slate-500">/blog/{p.slug}</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-3">
+        <a
+          href={`/admin/blog?edit=${p.id}`}
+          className="text-sm font-medium text-blue-accent hover:underline"
+        >
+          Editar
+        </a>
+        <form action={deleteBlogPost}>
+          <input type="hidden" name="id" value={p.id} />
+          <button
+            type="submit"
+            className="text-sm font-medium text-red-500 hover:underline"
+          >
+            Eliminar
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
 
 export default async function AdminBlogPage({
   searchParams,
@@ -13,6 +60,8 @@ export default async function AdminBlogPage({
     prisma.blogPost.findMany({ orderBy: { publishedAt: "desc" } }),
     edit ? prisma.blogPost.findUnique({ where: { id: edit } }) : null,
   ]);
+  const visibles = posts.slice(0, 6);
+  const resto = posts.slice(6);
 
   return (
     <div className="space-y-8">
@@ -119,52 +168,22 @@ export default async function AdminBlogPage({
         {posts.length === 0 && (
           <p className="text-sm text-slate-400">No hay artículos todavía.</p>
         )}
-        {posts.map((p) => (
-          <div
-            key={p.id}
-            className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-slate-200 p-4"
-          >
-            <div className="flex items-center gap-3">
-              {p.coverImageUrl && (
-                <Image
-                  src={p.coverImageUrl}
-                  alt={p.title}
-                  width={56}
-                  height={56}
-                  className="h-14 w-14 rounded-lg object-cover"
-                />
-              )}
-              <div>
-                <p className="text-sm font-semibold text-slate-900">
-                  {p.title}{" "}
-                  {!p.published && (
-                    <span className="ml-1 rounded bg-slate-200 px-1.5 py-0.5 text-[10px] font-semibold text-slate-500">
-                      BORRADOR
-                    </span>
-                  )}
-                </p>
-                <p className="text-xs text-slate-500">/blog/{p.slug}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <a
-                href={`/admin/blog?edit=${p.id}`}
-                className="text-sm font-medium text-blue-accent hover:underline"
-              >
-                Editar
-              </a>
-              <form action={deleteBlogPost}>
-                <input type="hidden" name="id" value={p.id} />
-                <button
-                  type="submit"
-                  className="text-sm font-medium text-red-500 hover:underline"
-                >
-                  Eliminar
-                </button>
-              </form>
-            </div>
-          </div>
+        {visibles.map((p) => (
+          <BlogRow key={p.id} p={p} />
         ))}
+
+        {resto.length > 0 && (
+          <details className="rounded-xl border border-slate-200">
+            <summary className="cursor-pointer list-none p-4 text-sm font-medium text-blue-accent hover:underline">
+              Ver los {resto.length} artículos restantes
+            </summary>
+            <div className="max-h-96 space-y-3 overflow-y-auto border-t border-slate-200 p-4">
+              {resto.map((p) => (
+                <BlogRow key={p.id} p={p} />
+              ))}
+            </div>
+          </details>
+        )}
       </div>
     </div>
   );
