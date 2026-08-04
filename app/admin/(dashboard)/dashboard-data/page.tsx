@@ -9,10 +9,6 @@ import {
   deleteCityStat,
 } from "./actions";
 
-function toDateInput(d: Date) {
-  return d.toISOString().slice(0, 10);
-}
-
 export default async function AdminDashboardDataPage() {
   const [stat, affiliations, deliveries, cityStats] = await Promise.all([
     prisma.dashboardStat.upsert({
@@ -37,53 +33,21 @@ export default async function AdminDashboardDataPage() {
         </p>
       </div>
 
-      {/* Último cliente + contadores principales */}
+      <p className="rounded-xl border border-blue-accent/20 bg-blue-accent/5 p-4 text-sm text-slate-600">
+        El <strong>último cliente afiliado</strong> ahora se gestiona por
+        separado, como una lista de todos tus clientes, en{" "}
+        <a href="/admin/clientes" className="font-semibold text-blue-accent hover:underline">
+          Clientes afiliados
+        </a>
+        .
+      </p>
+
+      {/* Contadores principales */}
       <form
         action={saveDashboardStat}
         className="grid gap-4 rounded-xl border border-slate-200 bg-slate-50 p-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         <h2 className="text-sm font-semibold text-slate-900 sm:col-span-2 lg:col-span-3">
-          Último cliente afiliado
-        </h2>
-
-        <label className="block">
-          <span className="text-sm font-medium text-slate-700">Nombre</span>
-          <input
-            name="lastClientName"
-            defaultValue={stat.lastClientName}
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
-          />
-        </label>
-        <label className="block">
-          <span className="text-sm font-medium text-slate-700">Ciudad</span>
-          <input
-            name="lastClientCity"
-            defaultValue={stat.lastClientCity}
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
-          />
-        </label>
-        <label className="block">
-          <span className="text-sm font-medium text-slate-700">
-            Plan al que se unió
-          </span>
-          <input
-            name="lastClientPlan"
-            placeholder="Plan casa"
-            defaultValue={stat.lastClientPlan}
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
-          />
-        </label>
-        <label className="block">
-          <span className="text-sm font-medium text-slate-700">Fecha</span>
-          <input
-            type="date"
-            name="lastClientDate"
-            defaultValue={toDateInput(stat.lastClientDate)}
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
-          />
-        </label>
-
-        <h2 className="mt-2 text-sm font-semibold text-slate-900 sm:col-span-2 lg:col-span-3">
           Contadores principales
         </h2>
 

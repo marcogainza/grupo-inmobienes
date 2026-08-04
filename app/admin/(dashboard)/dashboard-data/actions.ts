@@ -13,17 +13,9 @@ function num(formData: FormData, key: string) {
 export async function saveDashboardStat(formData: FormData) {
   await requireAdmin();
 
-  const lastClientDateRaw = String(formData.get("lastClientDate") ?? "");
-
   await prisma.dashboardStat.upsert({
     where: { id: "main" },
     update: {
-      lastClientName: String(formData.get("lastClientName") ?? "").trim(),
-      lastClientCity: String(formData.get("lastClientCity") ?? "").trim(),
-      lastClientPlan: String(formData.get("lastClientPlan") ?? "").trim(),
-      lastClientDate: lastClientDateRaw
-        ? new Date(lastClientDateRaw)
-        : new Date(),
       newClientsThisMonth: num(formData, "newClientsThisMonth"),
       newClientsGrowthPct: num(formData, "newClientsGrowthPct"),
       bienesEntregados: num(formData, "bienesEntregados"),

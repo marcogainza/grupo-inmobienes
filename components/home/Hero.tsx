@@ -139,7 +139,7 @@ export default function Hero() {
           </motion.div>
         </AnimatePresence>
 
-        <div className="relative flex justify-center lg:justify-end">
+        <div className="flex justify-center lg:justify-end">
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
@@ -147,56 +147,13 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="relative flex w-full max-w-md items-end gap-3 sm:max-w-lg"
+              className="flex w-full max-w-md flex-col items-center gap-5 sm:max-w-lg"
             >
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.15 }}
-                className="w-1/3 shrink-0"
-              >
-                <Image
-                  src={slide.images[0]}
-                  alt=""
-                  width={200}
-                  height={280}
-                  className="h-40 w-full rounded-2xl border-2 border-white/20 object-cover shadow-xl sm:h-48"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="w-1/3 shrink-0 -translate-y-4"
-              >
-                <Image
-                  src={slide.images[1]}
-                  alt=""
-                  width={220}
-                  height={340}
-                  className="h-52 w-full rounded-2xl border-2 border-gold/60 object-cover shadow-2xl sm:h-64"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.45 }}
-                className="w-1/3 shrink-0"
-              >
-                <Image
-                  src={slide.images[2]}
-                  alt=""
-                  width={200}
-                  height={280}
-                  className="h-40 w-full rounded-2xl border-2 border-white/20 object-cover shadow-xl sm:h-48"
-                />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.85, y: -10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
-                className="absolute -top-5 left-1/2 w-40 -translate-x-1/2 rounded-xl border border-white/10 bg-navy/90 px-3 py-2.5 text-center shadow-2xl backdrop-blur"
+                className="w-44 rounded-xl border border-white/10 bg-navy/90 px-3 py-2.5 text-center shadow-2xl backdrop-blur"
               >
                 <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-gold/20 text-base">
                   {slide.badgeIcon}
@@ -206,6 +163,51 @@ export default function Hero() {
                 </p>
                 <p className="mt-0.5 text-xs font-bold">{slide.badgeValue}</p>
               </motion.div>
+
+              <div className="grid w-full grid-cols-3 items-end gap-2 sm:gap-4">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="min-w-0"
+                >
+                  <Image
+                    src={slide.images[0]}
+                    alt=""
+                    width={200}
+                    height={280}
+                    className="h-32 w-full rounded-2xl border-2 border-white/20 object-cover shadow-xl sm:h-44"
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.35 }}
+                  className="min-w-0"
+                >
+                  <Image
+                    src={slide.images[1]}
+                    alt=""
+                    width={220}
+                    height={300}
+                    className="h-40 w-full rounded-2xl border-2 border-gold/60 object-cover shadow-2xl sm:h-56"
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="min-w-0"
+                >
+                  <Image
+                    src={slide.images[2]}
+                    alt=""
+                    width={200}
+                    height={280}
+                    className="h-32 w-full rounded-2xl border-2 border-white/20 object-cover shadow-xl sm:h-44"
+                  />
+                </motion.div>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import Nav from "@/components/Nav";
@@ -13,6 +14,29 @@ const dateFmt = new Intl.DateTimeFormat("es-EC", {
   month: "long",
   day: "numeric",
 });
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await prisma.blogPost.findUnique({ where: { slug } });
+  if (!post) return {};
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      publishedTime: post.publishedAt.toISOString(),
+      images: post.coverImageUrl ? [post.coverImageUrl] : undefined,
+    },
+  };
+}
 
 export default async function BlogPostPage({
   params,

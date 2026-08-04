@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SectionEyebrow from "./SectionEyebrow";
 import Reveal from "@/components/motion/Reveal";
+import { useMonto } from "./MontoContext";
 
 const MONTOS = [
   15000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000,
@@ -25,6 +26,7 @@ export default function Simulador() {
   const [monto, setMonto] = useState<number | "">("");
   const [plazo, setPlazo] = useState<number | "">("");
   const [cuota, setCuota] = useState<number | null>(null);
+  const { applyMonto } = useMonto();
 
   function calcular() {
     if (!monto || !plazo) return;
@@ -107,12 +109,21 @@ export default function Simulador() {
           </button>
 
           {cuota !== null && (
-            <p className="mt-6 text-center text-2xl font-bold text-slate-900">
-              Cuota estimada: {currency.format(cuota)}
-              <span className="block text-sm font-normal text-slate-500">
-                por mes (referencial, no incluye aportes de licitación)
-              </span>
-            </p>
+            <div className="mt-6 text-center">
+              <p className="text-2xl font-bold text-slate-900">
+                Cuota estimada: {currency.format(cuota)}
+                <span className="block text-sm font-normal text-slate-500">
+                  por mes (referencial, no incluye aportes de licitación)
+                </span>
+              </p>
+              <button
+                type="button"
+                onClick={() => monto && applyMonto(Number(monto))}
+                className="mt-4 rounded-full border border-gold px-6 py-2.5 text-sm font-semibold text-gold-dark transition hover:scale-105 hover:bg-gold/10"
+              >
+                Aplicar este monto a mi solicitud →
+              </button>
+            </div>
           )}
 
           <ul className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-slate-500">

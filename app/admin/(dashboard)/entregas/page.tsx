@@ -1,10 +1,56 @@
 import Image from "next/image";
 import { prisma } from "@/lib/db";
+import type { Entrega } from "@prisma/client";
 import { PROPERTY_TYPES, CITIES } from "@/lib/constants";
 import { saveEntrega, deleteEntrega } from "./actions";
 
 function toDateInput(d: Date) {
   return d.toISOString().slice(0, 10);
+}
+
+function EntregaRow({ e }: { e: Entrega }) {
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-slate-200 p-4">
+      <div className="flex items-center gap-3">
+        {e.photoUrl && (
+          <Image
+            src={e.photoUrl}
+            alt={e.clientName}
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-full object-cover"
+          />
+        )}
+        <div>
+          <p className="text-sm font-semibold text-slate-900">
+            {e.clientName} · {e.city}
+          </p>
+          <p className="text-xs text-slate-500">
+            {e.propertyType}
+            {e.neighborhood ? ` · ${e.neighborhood}` : ""} ·{" "}
+            {toDateInput(e.deliveredAt)}
+          </p>
+        </div>
+      </div>
+      <div className="flex items-center gap-3">
+        <a
+          href={`/admin/entregas?edit=${e.id}`}
+          className="text-sm font-medium text-blue-accent hover:underline"
+        >
+          Editar
+        </a>
+        <form action={deleteEntrega}>
+          <input type="hidden" name="id" value={e.id} />
+          <button
+            type="submit"
+            className="text-sm font-medium text-red-500 hover:underline"
+          >
+            Eliminar
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default async function AdminEntregasPage({
@@ -15,9 +61,11 @@ export default async function AdminEntregasPage({
   const { edit } = await searchParams;
 
   const [entregas, editing] = await Promise.all([
-    prisma.entrega.findMany({ orderBy: { deliveredAt: "desc" } }),
+    prisma.entrega.findMany({ orderBy: { createdAt: "desc" } }),
     edit ? prisma.entrega.findUnique({ where: { id: edit } }) : null,
   ]);
+  const visibles = entregas.slice(0, 6);
+  const resto = entregas.slice(6);
 
   return (
     <div className="space-y-8">
@@ -158,51 +206,22 @@ export default async function AdminEntregasPage({
         {entregas.length === 0 && (
           <p className="text-sm text-slate-400">No hay entregas todavía.</p>
         )}
-        {entregas.map((e) => (
-          <div
-            key={e.id}
-            className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-slate-200 p-4"
-          >
-            <div className="flex items-center gap-3">
-              {e.photoUrl && (
-                <Image
-                  src={e.photoUrl}
-                  alt={e.clientName}
-                  width={44}
-                  height={44}
-                  className="h-11 w-11 rounded-full object-cover"
-                />
-              )}
-              <div>
-                <p className="text-sm font-semibold text-slate-900">
-                  {e.clientName} · {e.city}
-                </p>
-                <p className="text-xs text-slate-500">
-                  {e.propertyType}
-                  {e.neighborhood ? ` · ${e.neighborhood}` : ""} ·{" "}
-                  {toDateInput(e.deliveredAt)}
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <a
-                href={`/admin/entregas?edit=${e.id}`}
-                className="text-sm font-medium text-blue-accent hover:underline"
-              >
-                Editar
-              </a>
-              <form action={deleteEntrega}>
-                <input type="hidden" name="id" value={e.id} />
-                <button
-                  type="submit"
-                  className="text-sm font-medium text-red-500 hover:underline"
-                >
-                  Eliminar
-                </button>
-              </form>
-            </div>
-          </div>
+        {visibles.map((e) => (
+          <EntregaRow key={e.id} e={e} />
         ))}
+
+        {resto.length > 0 && (
+          <details className="rounded-xl border border-slate-200">
+            <summary className="cursor-pointer list-none p-4 text-sm font-medium text-blue-accent hover:underline">
+              Ver las {resto.length} entregas restantes
+            </summary>
+            <div className="max-h-96 space-y-3 overflow-y-auto border-t border-slate-200 p-4">
+              {resto.map((e) => (
+                <EntregaRow key={e.id} e={e} />
+              ))}
+            </div>
+          </details>
+        )}
       </div>
     </div>
   );

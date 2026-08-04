@@ -55,14 +55,22 @@ model BlogPost {
   updatedAt      DateTime  @updatedAt
 }
 
+// Registro de cada cliente afiliado (lista histórica, no un valor único).
+model ClienteAfiliado {
+  id        String   @id @default(cuid())
+  name      String
+  city      String
+  plan      String
+  joinedAt  DateTime @default(now())
+  createdAt DateTime @default(now())
+
+  @@index([joinedAt])
+}
+
 // Singleton row (id fixed to "main") holding every editable number on the public /dashboard page
 // and the hero counters on the home page.
 model DashboardStat {
   id                       String   @id @default("main")
-  lastClientName           String   @default("")
-  lastClientCity           String   @default("")
-  lastClientPlan           String   @default("")
-  lastClientDate           DateTime @default(now())
   newClientsThisMonth      Int      @default(0)
   newClientsGrowthPct      Int      @default(0)
   bienesEntregados         Int      @default(0)

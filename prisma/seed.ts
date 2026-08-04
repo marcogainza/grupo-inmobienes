@@ -98,15 +98,24 @@ async function main() {
     console.log("✔ Post de blog de ejemplo creado");
   }
 
+  const clientesCount = await prisma.clienteAfiliado.count();
+  if (clientesCount === 0) {
+    await prisma.clienteAfiliado.create({
+      data: {
+        name: "Christian Santanas",
+        city: "Guayaquil",
+        plan: "Plan casa",
+        joinedAt: new Date("2026-07-28"),
+      },
+    });
+    console.log("✔ Cliente afiliado de ejemplo creado");
+  }
+
   await prisma.dashboardStat.upsert({
     where: { id: "main" },
     update: {},
     create: {
       id: "main",
-      lastClientName: "Christian Santanas",
-      lastClientCity: "Guayaquil",
-      lastClientPlan: "Plan casa",
-      lastClientDate: new Date("2026-07-28"),
       newClientsThisMonth: 0,
       newClientsGrowthPct: 12,
       bienesEntregados: 0,

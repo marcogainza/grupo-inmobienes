@@ -83,17 +83,13 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} Grupo Inmobienes. Todos los derechos reservados.</p>
           <div className="flex gap-4">
             <a
-              href="https://grupo-inmobienes.vercel.app/politica-de-privacidad"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/politica-de-privacidad"
               className="hover:text-gold hover:underline"
             >
               Política de Privacidad
             </a>
             <a
-              href="https://grupo-inmobienes.vercel.app/terminos-y-condiciones"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/terminos-y-condiciones"
               className="hover:text-gold hover:underline"
             >
               Términos y Condiciones

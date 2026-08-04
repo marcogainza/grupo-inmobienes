@@ -1,30 +1,31 @@
+import Link from "next/link";
 import SectionEyebrow from "./SectionEyebrow";
 import Reveal from "@/components/motion/Reveal";
 
 const FAQS = [
   {
     q: "¿En qué consiste un plan de compra programada?",
-    a: "Es un sistema de ahorro colectivo en el que te afilias a un grupo, realizas aportes mensuales y accedes a la adjudicación de tu bien por sorteo o licitación, sin necesidad de un crédito bancario tradicional.",
+    a: "Es un sistema de autofinanciamiento con el objetivo de lograr la adquisición de un bien en particular.",
   },
   {
     q: "¿Qué es exactamente la compra programada y en qué se diferencia de un crédito bancario?",
-    a: "A diferencia de un crédito bancario, no se evalúa historial crediticio ni se exige garante. Tus aportes conforman un fondo común que se adjudica periódicamente entre los participantes activos.",
+    a: "A diferencia de un crédito, la compra programada es un sistema de planificación inteligente: tú aportas a un fondo común junto con otros clientes para adquirir un bien sin los intereses bancarios tradicionales.",
   },
   {
     q: "¿Qué es un grupo y cuántas personas hay en cada uno?",
-    a: "Un grupo es el conjunto de afiliados que comparten un mismo plan y calendario de adjudicaciones. El tamaño varía según el monto y plazo del plan contratado.",
+    a: "Es una cantidad limitada de personas que se unen con el objetivo de adquirir un bien similar: 299 personas por cada grupo.",
   },
   {
     q: "¿Cómo funciona la adjudicación?",
-    a: "Cada mes se realiza un sorteo público entre los afiliados al día en sus aportes. También puedes optar por licitación, aportando un monto adicional voluntario para acelerar tu adjudicación.",
+    a: "Es un evento público donde nuestros clientes resultan favorecidos con la adjudicación para adquirir sus bienes, por sorteo o licitación.",
   },
   {
     q: "¿Qué es una asamblea?",
-    a: "Es la reunión pública, avalada ante un Notario, en la que se realiza el sorteo o la licitación mensual y se formaliza la adjudicación de los bienes.",
+    a: "Son actos públicos mediante los cuales un notario declara y certifica la adjudicación del bien al cliente que se encuentre al día en sus pagos y no haya sido favorecido anteriormente.",
   },
   {
-    q: "¿De qué formas puedo empezar a construir mi patrimonio (Adjudicación)?",
-    a: "Mediante sorteo mensual (participación igualitaria) o licitación (aporte adicional voluntario para acelerar tu adjudicación).",
+    q: "¿De qué formas puedo empezar a construir mi patrimonio (adjudicación)?",
+    a: "Mediante sorteo mensual (participación igualitaria) o licitación (adelantando cuotas para acelerar tu adjudicación).",
   },
 ];
 
@@ -48,9 +49,9 @@ export default function FAQ() {
                 key={item.q}
                 className="group p-6 transition-colors hover:bg-slate-50"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900 marker:content-none">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-slate-900 marker:content-none">
                   {item.q}
-                  <span className="ml-4 text-blue-accent transition-transform duration-300 group-open:rotate-45">
+                  <span className="shrink-0 text-blue-accent transition-transform duration-300 group-open:rotate-45">
                     +
                   </span>
                 </summary>
@@ -61,8 +62,13 @@ export default function FAQ() {
         </Reveal>
 
         <p className="mt-8 text-center text-sm text-slate-500">
-          ¿No encontraste lo que buscabas? Tenemos más respuestas detalladas
-          listas para despejar todas tus dudas.
+          ¿No encontraste lo que buscabas?{" "}
+          <Link
+            href="/faq"
+            className="font-semibold text-blue-accent hover:underline"
+          >
+            Ve todas las preguntas frecuentes →
+          </Link>
         </p>
       </div>
     </section>

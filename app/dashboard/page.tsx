@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import StatCard from "@/components/dashboard/StatCard";
@@ -7,7 +8,9 @@ import ClientesPorCiudadChart from "@/components/dashboard/ClientesPorCiudadChar
 import { monthLabel } from "@/lib/dates";
 
 export const metadata = {
-  title: "Dashboard — Grupo Inmobienes",
+  title: "Transparencia y Crecimiento en Tiempo Real",
+  description:
+    "Cifras reales de Grupo Inmobienes: familias adjudicadas, entregas mensuales y clientes afiliados por ciudad, actualizadas en tiempo real.",
 };
 
 export const dynamic = "force-dynamic";
@@ -34,7 +37,7 @@ function initials(name: string) {
 }
 
 export default async function DashboardPage() {
-  const [stat, affiliations, deliveries, cityStats, entregas] =
+  const [stat, affiliations, deliveries, cityStats, entregas, clientes] =
     await Promise.all([
       prisma.dashboardStat.upsert({
         where: { id: "main" },
@@ -45,6 +48,10 @@ export default async function DashboardPage() {
       prisma.monthlyDelivery.findMany({ orderBy: { order: "asc" } }),
       prisma.cityStat.findMany({ orderBy: { order: "asc" } }),
       prisma.entrega.findMany({ orderBy: { deliveredAt: "desc" }, take: 3 }),
+      prisma.clienteAfiliado.findMany({
+        orderBy: { joinedAt: "desc" },
+        take: 5,
+      }),
     ]);
 
   const affiliationData = affiliations.map((a) => ({
@@ -56,24 +63,32 @@ export default async function DashboardPage() {
     count: d.count,
   }));
   const cityData = cityStats.map((c) => ({ city: c.city, count: c.count }));
+  const ultimoCliente = clientes[0] ?? null;
 
   return (
     <div className="min-h-full bg-slate-50">
       <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+        <div className="mx-auto max-w-3xl px-4 py-10 text-center sm:px-6">
           <Link
             href="/"
             className="text-sm font-medium text-blue-accent hover:underline"
           >
             ← Volver al inicio
           </Link>
+          <Image
+            src="/logo-inmo-azul.png"
+            alt="Grupo Inmobienes"
+            width={140}
+            height={30}
+            className="mx-auto mt-6 h-8 w-auto"
+          />
           <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-blue-accent">
             Transparencia total
           </p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
             Nuestro Crecimiento en Tiempo Real
           </h1>
-          <p className="mt-2 max-w-2xl text-slate-600">
+          <p className="mx-auto mt-2 max-w-2xl text-slate-600">
             Datos actualizados de nuestra operación. Porque en Grupo
             Inmobienes, la confianza se construye con transparencia.
           </p>
@@ -88,15 +103,16 @@ export default async function DashboardPage() {
             </p>
             <div className="mt-3 flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/15 text-sm font-bold text-navy">
-                {stat.lastClientName ? initials(stat.lastClientName) : "—"}
+                {ultimoCliente ? initials(ultimoCliente.name) : "—"}
               </div>
               <div>
                 <p className="text-sm font-semibold text-slate-900">
-                  {stat.lastClientName || "Sin datos"} —{" "}
-                  {stat.lastClientCity}
+                  {ultimoCliente
+                    ? `${ultimoCliente.name} — ${ultimoCliente.city}`
+                    : "Sin datos"}
                 </p>
                 <p className="flex items-center gap-1 text-xs text-blue-accent">
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold/100" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-gold" />
                   Reciente
                 </p>
               </div>
@@ -127,20 +143,20 @@ export default async function DashboardPage() {
             <p className="text-sm font-semibold text-slate-900">
               Nuevos clientes
             </p>
-            <div className="mt-4 rounded-xl bg-slate-50 p-4">
-              {stat.lastClientName ? (
-                <>
-                  <p className="text-sm text-slate-700">
-                    {stat.lastClientName} de {stat.lastClientCity} se unió al{" "}
-                    {stat.lastClientPlan || "plan"}
-                  </p>
-                  <p className="mt-1 text-xs text-slate-400">
-                    {dateFmt.format(stat.lastClientDate)}
-                  </p>
-                </>
-              ) : (
+            <div className="mt-4 space-y-3">
+              {clientes.length === 0 && (
                 <p className="text-sm text-slate-400">Sin datos aún.</p>
               )}
+              {clientes.map((c) => (
+                <div key={c.id} className="rounded-xl bg-slate-50 p-3">
+                  <p className="text-sm text-slate-700">
+                    {c.name} de {c.city} se unió al {c.plan}
+                  </p>
+                  <p className="mt-1 text-xs text-slate-400">
+                    {dateFmt.format(c.joinedAt)}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
 

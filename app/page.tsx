@@ -17,6 +17,7 @@ import Agencias from "@/components/home/Agencias";
 import FAQ from "@/components/home/FAQ";
 import BlogPreview from "@/components/home/BlogPreview";
 import Contacto from "@/components/home/Contacto";
+import { MontoProvider } from "@/components/home/MontoContext";
 
 // Se renderiza por request: el contenido editable desde el CMS (entregas,
 // testimonios, cifras) debe reflejarse siempre sin depender del build.
@@ -59,14 +60,16 @@ export default async function Home() {
         <EntregasRecientes entregas={entregas} />
         <Catalogo />
         <FormasAdjudicacion />
-        <Simulador />
-        <Testimonios testimonios={testimonios} />
-        <Confianza />
-        <CTAAsesoria />
-        <Agencias />
-        <FAQ />
-        <BlogPreview posts={posts} />
-        <Contacto />
+        <MontoProvider>
+          <Simulador />
+          <Testimonios testimonios={testimonios} />
+          <Confianza />
+          <CTAAsesoria />
+          <Agencias />
+          <FAQ />
+          <BlogPreview posts={posts} />
+          <Contacto />
+        </MontoProvider>
       </main>
       <Footer />
       <WhatsAppButton />

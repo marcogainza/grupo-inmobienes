@@ -3,9 +3,11 @@
 import { useState } from "react";
 import SectionEyebrow from "./SectionEyebrow";
 import { CITIES } from "@/lib/constants";
+import { useMonto } from "./MontoContext";
 
 export default function Contacto() {
   const [enviado, setEnviado] = useState(false);
+  const { monto } = useMonto();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -40,6 +42,11 @@ export default function Contacto() {
             onSubmit={handleSubmit}
             className="mt-10 space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-8"
           >
+            {monto !== null && (
+              <p className="rounded-lg bg-gold/10 px-3 py-2 text-xs font-medium text-gold-dark">
+                Monto aplicado desde el simulador: ${monto.toLocaleString("es-EC")}
+              </p>
+            )}
             <div className="grid gap-4 sm:grid-cols-2">
               <input
                 required
@@ -77,8 +84,11 @@ export default function Contacto() {
               </select>
             </div>
             <input
+              key={monto ?? "empty"}
               type="text"
+              name="monto"
               placeholder="Monto a financiar $"
+              defaultValue={monto ?? ""}
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
             />
             <textarea
@@ -88,12 +98,27 @@ export default function Contacto() {
             />
             <label className="flex items-start gap-2 text-xs text-slate-500">
               <input required type="checkbox" className="mt-0.5" />
-              He leído y acepto las Políticas de Privacidad y los Términos y
-              Condiciones.
+              He leído y acepto las{" "}
+              <a
+                href="/politica-de-privacidad"
+                target="_blank"
+                className="underline hover:text-gold-dark"
+              >
+                Políticas de Privacidad
+              </a>{" "}
+              y los{" "}
+              <a
+                href="/terminos-y-condiciones"
+                target="_blank"
+                className="underline hover:text-gold-dark"
+              >
+                Términos y Condiciones
+              </a>
+              .
             </label>
             <button
               type="submit"
-              className="w-full rounded-full bg-gold/100 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gold-dark"
+              className="w-full rounded-full bg-gold px-6 py-3 text-sm font-semibold text-white transition hover:scale-[1.02] hover:bg-gold-dark"
             >
               Enviar mensaje
             </button>

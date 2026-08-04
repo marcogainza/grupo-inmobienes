@@ -8,6 +8,7 @@ const LINKS = [
   { href: "/admin/entregas", label: "Entregas recientes" },
   { href: "/admin/testimonios", label: "Testimonios" },
   { href: "/admin/blog", label: "Blog" },
+  { href: "/admin/clientes", label: "Clientes afiliados" },
   { href: "/admin/dashboard-data", label: "Cifras del dashboard" },
 ];
 

@@ -6,7 +6,9 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata = {
-  title: "Blog — Grupo Inmobienes",
+  title: "Blog",
+  description:
+    "Noticias, consejos y novedades sobre el sistema de compra programada de vivienda de Grupo Inmobienes.",
 };
 
 export const dynamic = "force-dynamic";
