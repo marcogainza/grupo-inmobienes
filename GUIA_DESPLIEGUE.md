@@ -73,17 +73,13 @@ sigue las instrucciones en pantalla de GitHub.)
 4. Cuando termine, Vercel te preguntará a qué proyecto **conectar** esta
    base de datos — selecciona `grupo-inmobienes` y confirma. Esto agrega
    automáticamente variables de entorno a tu proyecto.
-5. Ve a la base de datos creada → pestaña **.env.local** (o "Quickstart") y
-   copia las cadenas de conexión que te muestre. Vercel puede nombrarlas
-   distinto según el momento (`POSTGRES_URL`, `DATABASE_URL`,
-   `POSTGRES_URL_NON_POOLING`, etc.). Vas a necesitar:
-   - Una **cadena con pooling** (para uso normal de la app) → la usarás como
-     `DATABASE_URL`.
-   - Una **cadena directa/sin pooling** (para migraciones) → la usarás como
-     `DIRECT_URL`. Si Vercel solo te muestra una cadena, puedes usar la
-     misma para ambas.
-
-Guarda estos dos valores, los necesitas en el paso 5.
+5. Al conectar la base a tu proyecto, Vercel agrega automáticamente varias
+   variables de entorno (verás nombres como `POSTGRES_URL`, `DATABASE_URL`,
+   `DATABASE_URL_UNPOOLED`, `PGHOST`, etc. en Settings → Environment
+   Variables). El proyecto ya está configurado para usar exactamente
+   `DATABASE_URL` (conexión con pooling) y `DATABASE_URL_UNPOOLED` (conexión
+   directa, para migraciones) — **no necesitas copiar ni renombrar nada**,
+   ya deberían existir con esos nombres apenas conectes la base.
 
 ---
 
@@ -93,26 +89,30 @@ Guarda estos dos valores, los necesitas en el paso 5.
    nuevo y elige **Blob**.
 2. Ponle un nombre (por ejemplo `inmobienes-media`) y conéctalo al proyecto
    `grupo-inmobienes`.
-3. Esto crea automáticamente la variable de entorno
-   `BLOB_READ_WRITE_TOKEN` en tu proyecto — no necesitas copiarla a mano si
-   Vercel la agrega sola (verifícalo en el paso 5).
+3. Los proyectos conectados a una tienda Blob de Vercel se autentican
+   automáticamente (OIDC) sin necesidad de copiar ningún token — no tienes
+   que hacer nada más aquí. (`BLOB_READ_WRITE_TOKEN` solo hace falta si
+   corres el proyecto en tu computadora, fuera de Vercel; ver paso 5).
 
 ---
 
 ## 5. Configurar las variables de entorno
 
 1. En tu proyecto de Vercel, ve a **Settings → Environment Variables**.
-2. Verifica/agrega estas variables (marca los tres entornos: Production,
-   Preview y Development):
+2. `DATABASE_URL` y `DATABASE_URL_UNPOOLED` ya deberían existir (paso 3), y
+   el almacenamiento de imágenes no necesita variable alguna (paso 4). Solo
+   falta agregar estas tres, con **Add Environment Variable** (marca
+   Production, Preview y Development):
 
 | Variable | Valor |
 |---|---|
-| `DATABASE_URL` | La cadena con pooling que copiaste en el paso 3 |
-| `DIRECT_URL` | La cadena directa/sin pooling del paso 3 |
-| `BLOB_READ_WRITE_TOKEN` | Debería existir ya (paso 4); si no, cópiala desde la base Blob |
 | `AUTH_SECRET` | Un valor aleatorio único (ver abajo cómo generarlo) |
 | `ADMIN_USERNAME` | El usuario con el que tu cliente iniciará sesión en `/admin` |
 | `ADMIN_PASSWORD` | Una contraseña temporal (tu cliente la cambiará luego desde el panel) |
+
+Si por alguna razón `DATABASE_URL` o `DATABASE_URL_UNPOOLED` no aparecen en
+la lista, revisa que la base de datos del paso 3 esté conectada a este
+proyecto (Storage → tu base → pestaña **Projects**).
 
 Para generar un valor aleatorio para `AUTH_SECRET`, ejecuta en tu terminal:
 
@@ -224,11 +224,14 @@ Vercel detecta el push y despliega automáticamente la nueva versión.
 ## 10. Problemas comunes
 
 - **El sitio muestra un error de base de datos** → revisa que
-  `DATABASE_URL` y `DIRECT_URL` estén bien configuradas en Vercel
+  `DATABASE_URL` y `DATABASE_URL_UNPOOLED` estén bien configuradas en Vercel
   (Settings → Environment Variables) y que hayas corrido `npm run db:push`
   contra esa misma base.
-- **Las fotos no se suben** → revisa que `BLOB_READ_WRITE_TOKEN` exista en
-  las variables de entorno del proyecto.
+- **Las fotos no se suben en producción** → confirma en Storage → tu tienda
+  Blob → pestaña **Projects** que `grupo-inmobienes` aparece conectado.
+- **Las fotos no se suben en local** → agrega `BLOB_READ_WRITE_TOKEN` a tu
+  `.env.local` (cópialo desde Storage → tu tienda Blob → ".env.local"),
+  ya que fuera de Vercel no hay autenticación OIDC automática.
 - **No puedo iniciar sesión en `/admin`** → confirma el usuario/clave que
   usaste al correr `npm run db:seed`. Si lo olvidaste, puedes volver a
   correr `npm run db:seed` con nuevas variables `ADMIN_USERNAME`/
