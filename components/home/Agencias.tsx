@@ -8,12 +8,14 @@ const AGENCIAS = [
     address: "Av. Los Shyris e Isla Floreana",
     detail: "Local esquinero",
     photo: "/quito.jpg",
+    mapsUrl: "https://maps.app.goo.gl/8bqJsi26co8T4g9C8",
   },
   {
     city: "Guayaquil",
     address: "Alborada, etapa II, villa 12, Mz. 21",
     detail: "Frente a Créditos Económicos",
     photo: "/gye.jpg",
+    mapsUrl: "https://maps.app.goo.gl/b6EzpVnNQNS6M8tb6",
   },
 ];
 
@@ -30,13 +32,12 @@ export default function Agencias() {
           {AGENCIAS.map((a, i) => (
             <Reveal key={a.city} delay={i * 0.12}>
               <div className="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-                <div className="overflow-hidden">
+                <div className="relative aspect-[4/5] w-full overflow-hidden">
                   <Image
                     src={a.photo}
                     alt={`Agencia ${a.city}`}
-                    width={600}
-                    height={320}
-                    className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-8">
@@ -46,9 +47,7 @@ export default function Agencias() {
                   <p className="mt-2 text-slate-600">{a.address}</p>
                   <p className="text-sm text-slate-400">{a.detail}</p>
                   <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                      `${a.address}, ${a.city}, Ecuador`
-                    )}`}
+                    href={a.mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-4 inline-block text-sm font-semibold text-blue-accent hover:underline"

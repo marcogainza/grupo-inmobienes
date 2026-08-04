@@ -38,30 +38,33 @@ export default function BlogPreview({ posts }: { posts: Post[] }) {
         ) : (
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, i) => (
-              <Reveal key={post.id} delay={(i % 3) * 0.1}>
+              <Reveal key={post.id} delay={(i % 3) * 0.1} className="h-full">
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-lg"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-lg"
                 >
-                  {post.coverImageUrl && (
-                    <div className="overflow-hidden">
+                  <div className="relative h-44 w-full shrink-0 overflow-hidden bg-navy/5">
+                    {post.coverImageUrl ? (
                       <Image
                         src={post.coverImageUrl}
                         alt={post.title}
-                        width={400}
-                        height={220}
-                        className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
                       />
-                    </div>
-                  )}
-                  <div className="p-6">
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center text-3xl">
+                        📰
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
                     <p className="text-xs text-slate-400">
                       {dateFmt.format(post.publishedAt)}
                     </p>
-                    <h3 className="mt-2 text-lg font-semibold text-slate-900">
+                    <h3 className="mt-2 line-clamp-2 text-lg font-semibold text-slate-900">
                       {post.title}
                     </h3>
-                    <p className="mt-2 text-sm text-slate-600">
+                    <p className="mt-2 line-clamp-3 flex-1 text-sm text-slate-600">
                       {post.excerpt}
                     </p>
                   </div>

@@ -17,7 +17,10 @@ export default function FormasAdjudicacion() {
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           <Reveal>
             <div className="h-full rounded-2xl border border-slate-200 bg-white p-8 transition duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-              <h3 className="text-xl font-bold text-slate-900">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-accent/10 text-2xl">
+                🎲
+              </span>
+              <h3 className="mt-4 text-xl font-bold text-slate-900">
                 Sorteo mensual
               </h3>
               <p className="mt-3 text-sm text-slate-600">
@@ -39,7 +42,10 @@ export default function FormasAdjudicacion() {
               <span className="absolute -top-3 right-6 rounded-full bg-gold px-3 py-1 text-xs font-bold text-white">
                 RECOMENDADO
               </span>
-              <h3 className="text-xl font-bold text-slate-900">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gold/15 text-2xl">
+                📈
+              </span>
+              <h3 className="mt-4 text-xl font-bold text-slate-900">
                 Licitación
               </h3>
               <p className="mt-3 text-sm text-slate-600">

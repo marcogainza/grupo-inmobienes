@@ -196,15 +196,15 @@ export default function Hero() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
-                className="absolute -top-6 left-1/2 w-56 -translate-x-1/2 rounded-2xl border border-white/10 bg-navy/90 p-4 text-center shadow-2xl backdrop-blur"
+                className="absolute -top-5 left-1/2 w-40 -translate-x-1/2 rounded-xl border border-white/10 bg-navy/90 px-3 py-2.5 text-center shadow-2xl backdrop-blur"
               >
-                <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-gold/20 text-xl">
+                <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-gold/20 text-base">
                   {slide.badgeIcon}
                 </div>
-                <p className="mt-2 text-[10px] font-semibold uppercase tracking-widest text-gold">
+                <p className="mt-1.5 text-[8px] font-semibold uppercase tracking-widest text-gold">
                   {slide.badgeLabel}
                 </p>
-                <p className="mt-1 text-sm font-bold">{slide.badgeValue}</p>
+                <p className="mt-0.5 text-xs font-bold">{slide.badgeValue}</p>
               </motion.div>
             </motion.div>
           </AnimatePresence>

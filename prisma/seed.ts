@@ -113,9 +113,9 @@ async function main() {
       asambleasEjecutadas: 0,
       inmueblesEntregados: 0,
       montoPromedioAdjudicado: 0,
-      familiasAdjudicadas: 0,
-      ciudadesAlcanzadas: 0,
-      aniosExperiencia: 0,
+      familiasAdjudicadas: 150,
+      ciudadesAlcanzadas: 10,
+      aniosExperiencia: 4,
     },
   });
   console.log("✔ DashboardStat inicializado");

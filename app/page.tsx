@@ -30,7 +30,7 @@ export default async function Home() {
       create: { id: "main" },
     }),
     prisma.entrega.findMany({
-      orderBy: { deliveredAt: "desc" },
+      orderBy: { createdAt: "desc" },
       take: 6,
     }),
     prisma.testimonio.findMany({
