@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"
-      className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gold/100 text-2xl text-white shadow-lg shadow-gold/30 transition hover:bg-gold-dark"
+      className="fixed bottom-5 right-5 z-50 flex h-14 w-14 animate-[pulse_2.5s_ease-in-out_infinite] items-center justify-center rounded-full bg-gold text-2xl text-white shadow-lg shadow-gold/30 transition hover:scale-110 hover:animate-none hover:bg-gold-dark"
     >
       💬
     </a>

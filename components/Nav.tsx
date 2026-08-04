@@ -37,9 +37,10 @@ export default function Nav() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-slate-300 transition hover:text-white"
+              className="group relative text-sm text-slate-300 transition hover:text-white"
             >
               {link.label}
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </nav>
@@ -47,13 +48,13 @@ export default function Nav() {
         <div className="hidden items-center gap-3 md:flex">
           <Link
             href="/dashboard"
-            className="rounded-full border border-gold/40 px-4 py-2 text-sm font-medium text-gold transition hover:bg-gold/10"
+            className="rounded-full border border-gold/40 px-4 py-2 text-sm font-medium text-gold transition hover:scale-105 hover:bg-gold/10"
           >
             🤝 Transparencia
           </Link>
           <a
             href="#contacto"
-            className="rounded-full bg-gold/100 px-4 py-2 text-sm font-semibold text-navy transition hover:bg-gold-dark"
+            className="rounded-full bg-gold px-4 py-2 text-sm font-semibold text-navy transition hover:scale-105 hover:bg-gold-dark"
           >
             Comenzar ahora
           </a>

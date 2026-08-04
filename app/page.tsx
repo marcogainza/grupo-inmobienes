@@ -3,6 +3,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Hero from "@/components/home/Hero";
+import StatsStripe from "@/components/home/StatsStripe";
 import ComoFunciona from "@/components/home/ComoFunciona";
 import Beneficios from "@/components/home/Beneficios";
 import EntregasRecientes from "@/components/home/EntregasRecientes";
@@ -47,7 +48,8 @@ export default async function Home() {
     <div className="flex min-h-full flex-col">
       <Nav />
       <main className="flex-1">
-        <Hero
+        <Hero />
+        <StatsStripe
           familiasAdjudicadas={stat.familiasAdjudicadas}
           ciudadesAlcanzadas={stat.ciudadesAlcanzadas}
           aniosExperiencia={stat.aniosExperiencia}

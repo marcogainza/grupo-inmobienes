@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import SectionEyebrow from "./SectionEyebrow";
+import Reveal from "@/components/motion/Reveal";
 
 type Post = {
   id: string;
@@ -36,33 +37,36 @@ export default function BlogPreview({ posts }: { posts: Post[] }) {
           </p>
         ) : (
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
-              <Link
-                key={post.id}
-                href={`/blog/${post.slug}`}
-                className="block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md"
-              >
-                {post.coverImageUrl && (
-                  <Image
-                    src={post.coverImageUrl}
-                    alt={post.title}
-                    width={400}
-                    height={220}
-                    className="h-44 w-full object-cover"
-                  />
-                )}
-                <div className="p-6">
-                  <p className="text-xs text-slate-400">
-                    {dateFmt.format(post.publishedAt)}
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold text-slate-900">
-                    {post.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-slate-600">
-                    {post.excerpt}
-                  </p>
-                </div>
-              </Link>
+            {posts.map((post, i) => (
+              <Reveal key={post.id} delay={(i % 3) * 0.1}>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-lg"
+                >
+                  {post.coverImageUrl && (
+                    <div className="overflow-hidden">
+                      <Image
+                        src={post.coverImageUrl}
+                        alt={post.title}
+                        width={400}
+                        height={220}
+                        className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <p className="text-xs text-slate-400">
+                      {dateFmt.format(post.publishedAt)}
+                    </p>
+                    <h3 className="mt-2 text-lg font-semibold text-slate-900">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-slate-600">
+                      {post.excerpt}
+                    </p>
+                  </div>
+                </Link>
+              </Reveal>
             ))}
           </div>
         )}

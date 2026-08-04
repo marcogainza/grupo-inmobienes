@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SectionEyebrow from "./SectionEyebrow";
+import Reveal from "@/components/motion/Reveal";
 
 type Testimonio = {
   id: string;
@@ -38,11 +39,9 @@ export default function Testimonios({
           </p>
         ) : (
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {testimonios.map((t) => (
-              <figure
-                key={t.id}
-                className="flex h-full flex-col rounded-2xl border border-slate-200 bg-slate-50 p-6"
-              >
+            {testimonios.map((t, i) => (
+              <Reveal key={t.id} delay={(i % 3) * 0.1} className="h-full">
+              <figure className="flex h-full flex-col rounded-2xl border border-slate-200 bg-slate-50 p-6 transition duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-lg">
                 <blockquote className="flex-1 text-sm italic text-slate-700">
                   “{t.comment}”
                 </blockquote>
@@ -70,6 +69,7 @@ export default function Testimonios({
                   </div>
                 </figcaption>
               </figure>
+              </Reveal>
             ))}
           </div>
         )}

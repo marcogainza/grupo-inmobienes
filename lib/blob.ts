@@ -15,9 +15,9 @@ export async function uploadImage(
   const pathname = `${folder}/${Date.now()}-${safeName}`;
 
   const blob = await put(pathname, file, {
-    access: "public",
+    access: "private",
     addRandomSuffix: true,
   });
 
-  return blob.url;
+  return `/api/media?pathname=${encodeURIComponent(blob.pathname)}`;
 }

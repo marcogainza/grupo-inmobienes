@@ -1,13 +1,18 @@
 import Image from "next/image";
 import SectionEyebrow from "./SectionEyebrow";
+import Reveal from "@/components/motion/Reveal";
 import { PROPERTY_TYPES } from "@/lib/constants";
 
 const PHOTOS: Record<string, string> = {
-  Casa: "/local-1.jpg",
-  Departamento: "/venucia.png",
+  Casa: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+  Departamento:
+    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80",
   Terreno: "/terreno-0.png",
-  "Proyecto inmobiliario": "/local-3.jpg",
+  "Proyecto inmobiliario":
+    "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
   "Local comercial": "/local-2.jpg",
+  Vehículo:
+    "https://images.unsplash.com/photo-1704340142770-b52988e5b6eb?w=800&q=80",
 };
 
 export default function Catalogo() {
@@ -24,32 +29,22 @@ export default function Catalogo() {
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {PROPERTY_TYPES.map((type) => {
-            const photo = PHOTOS[type];
-            return (
-              <div
-                key={type}
-                className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50"
-              >
-                {photo ? (
-                  <Image
-                    src={photo}
-                    alt={type}
-                    width={400}
-                    height={220}
-                    className="h-40 w-full object-cover"
-                  />
-                ) : (
-                  <div className="flex h-40 items-center justify-center bg-navy/5 text-4xl">
-                    🚗
-                  </div>
-                )}
-                <p className="p-4 text-lg font-semibold text-slate-900">
+          {PROPERTY_TYPES.map((type, i) => (
+            <Reveal key={type} delay={i * 0.08}>
+              <div className="group relative h-56 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+                <Image
+                  src={PHOTOS[type]}
+                  alt={type}
+                  fill
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/10 to-transparent transition-opacity duration-300 group-hover:from-navy/90" />
+                <p className="absolute bottom-4 left-4 text-lg font-semibold text-white drop-shadow">
                   {type}
                 </p>
               </div>
-            );
-          })}
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

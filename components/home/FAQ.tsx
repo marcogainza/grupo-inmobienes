@@ -1,4 +1,5 @@
 import SectionEyebrow from "./SectionEyebrow";
+import Reveal from "@/components/motion/Reveal";
 
 const FAQS = [
   {
@@ -40,19 +41,24 @@ export default function FAQ() {
           sistema de compra programada.
         </p>
 
-        <div className="mt-10 divide-y divide-slate-200 rounded-2xl border border-slate-200">
-          {FAQS.map((item) => (
-            <details key={item.q} className="group p-6">
-              <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900 marker:content-none">
-                {item.q}
-                <span className="ml-4 text-blue-accent transition group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <p className="mt-3 text-sm text-slate-600">{item.a}</p>
-            </details>
-          ))}
-        </div>
+        <Reveal>
+          <div className="mt-10 divide-y divide-slate-200 rounded-2xl border border-slate-200">
+            {FAQS.map((item) => (
+              <details
+                key={item.q}
+                className="group p-6 transition-colors hover:bg-slate-50"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900 marker:content-none">
+                  {item.q}
+                  <span className="ml-4 text-blue-accent transition-transform duration-300 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 text-sm text-slate-600">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </Reveal>
 
         <p className="mt-8 text-center text-sm text-slate-500">
           ¿No encontraste lo que buscabas? Tenemos más respuestas detalladas

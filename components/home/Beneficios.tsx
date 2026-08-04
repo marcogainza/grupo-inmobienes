@@ -1,4 +1,5 @@
 import SectionEyebrow from "./SectionEyebrow";
+import Reveal from "@/components/motion/Reveal";
 
 const BENEFICIOS = [
   {
@@ -48,17 +49,18 @@ export default function Beneficios() {
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {BENEFICIOS.map((b) => (
-            <div
-              key={b.title}
-              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
-            >
-              <span className="text-3xl">{b.icon}</span>
-              <h3 className="mt-3 text-lg font-semibold text-slate-900">
-                {b.title}
-              </h3>
-              <p className="mt-2 text-sm text-slate-600">{b.text}</p>
-            </div>
+          {BENEFICIOS.map((b, i) => (
+            <Reveal key={b.title} delay={(i % 3) * 0.1}>
+              <div className="group h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-lg">
+                <span className="inline-block text-3xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6">
+                  {b.icon}
+                </span>
+                <h3 className="mt-3 text-lg font-semibold text-slate-900">
+                  {b.title}
+                </h3>
+                <p className="mt-2 text-sm text-slate-600">{b.text}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SectionEyebrow from "./SectionEyebrow";
+import Reveal from "@/components/motion/Reveal";
 
 const AGENCIAS = [
   {
@@ -26,36 +27,37 @@ export default function Agencias() {
         </h2>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {AGENCIAS.map((a) => (
-            <div
-              key={a.city}
-              className="overflow-hidden rounded-2xl border border-slate-200 bg-white"
-            >
-              <Image
-                src={a.photo}
-                alt={`Agencia ${a.city}`}
-                width={600}
-                height={320}
-                className="h-48 w-full object-cover"
-              />
-              <div className="p-8">
-                <h3 className="text-xl font-bold text-slate-900">
-                  {a.city}
-                </h3>
-                <p className="mt-2 text-slate-600">{a.address}</p>
-                <p className="text-sm text-slate-400">{a.detail}</p>
-                <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                    `${a.address}, ${a.city}, Ecuador`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 inline-block text-sm font-semibold text-blue-accent hover:underline"
-                >
-                  Cómo llegar →
-                </a>
+          {AGENCIAS.map((a, i) => (
+            <Reveal key={a.city} delay={i * 0.12}>
+              <div className="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1.5 hover:shadow-lg">
+                <div className="overflow-hidden">
+                  <Image
+                    src={a.photo}
+                    alt={`Agencia ${a.city}`}
+                    width={600}
+                    height={320}
+                    className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <div className="p-8">
+                  <h3 className="text-xl font-bold text-slate-900">
+                    {a.city}
+                  </h3>
+                  <p className="mt-2 text-slate-600">{a.address}</p>
+                  <p className="text-sm text-slate-400">{a.detail}</p>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                      `${a.address}, ${a.city}, Ecuador`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-block text-sm font-semibold text-blue-accent hover:underline"
+                  >
+                    Cómo llegar →
+                  </a>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

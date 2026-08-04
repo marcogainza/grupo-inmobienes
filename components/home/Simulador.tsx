@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import SectionEyebrow from "./SectionEyebrow";
+import Reveal from "@/components/motion/Reveal";
 
 const MONTOS = [
   15000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000,
@@ -33,6 +34,7 @@ export default function Simulador() {
   return (
     <section className="bg-white py-20">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
+        <Reveal>
         <div className="text-center">
           <SectionEyebrow text="Simulador de plan" />
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
@@ -43,7 +45,9 @@ export default function Simulador() {
             plan. Conoce al instante tu cuota mensual estimada.
           </p>
         </div>
+        </Reveal>
 
+        <Reveal delay={0.15}>
         <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-8">
           <p className="text-center text-sm font-semibold text-slate-500">
             Simulación de plan programado
@@ -97,7 +101,7 @@ export default function Simulador() {
           <button
             type="button"
             onClick={calcular}
-            className="mt-6 w-full rounded-full bg-gold/100 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gold-dark"
+            className="mt-6 w-full rounded-full bg-gold px-6 py-3 text-sm font-semibold text-white transition hover:scale-[1.02] hover:bg-gold-dark"
           >
             Calcular cuota mensual
           </button>
@@ -118,6 +122,7 @@ export default function Simulador() {
             <li>✓ Asesoría gratuita</li>
           </ul>
         </div>
+        </Reveal>
       </div>
     </section>
   );

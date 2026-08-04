@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SectionEyebrow from "./SectionEyebrow";
+import Reveal from "@/components/motion/Reveal";
 
 type Entrega = {
   id: string;
@@ -50,11 +51,9 @@ export default function EntregasRecientes({
           </p>
         ) : (
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {entregas.map((e) => (
-              <div
-                key={e.id}
-                className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
-              >
+            {entregas.map((e, i) => (
+              <Reveal key={e.id} delay={(i % 3) * 0.1}>
+              <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-lg">
                 <div className="flex items-center gap-4 p-6">
                   {e.photoUrl ? (
                     <Image
@@ -93,6 +92,7 @@ export default function EntregasRecientes({
                   )}
                 </div>
               </div>
+              </Reveal>
             ))}
           </div>
         )}
