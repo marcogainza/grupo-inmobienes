@@ -21,6 +21,14 @@ const SECURITY_HEADERS = [
 ];
 
 const nextConfig: NextConfig = {
+  // Las Server Actions (formularios del CMS que suben fotos) limitan el
+  // body a 1MB por defecto — insuficiente para una foto de portada normal.
+  // Debe ser >= al límite de tamaño validado en lib/blob.ts (8MB).
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
+  },
   async headers() {
     return [
       {
