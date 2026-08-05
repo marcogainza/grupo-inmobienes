@@ -53,6 +53,17 @@ model BlogPost {
   publishedAt    DateTime  @default(now())
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+  categoryId     String?
+  category       BlogCategory? @relation(fields: [categoryId], references: [id])
+
+  @@index([categoryId])
+}
+
+model BlogCategory {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  posts     BlogPost[]
 }
 
 // Registro de cada cliente afiliado (lista histórica, no un valor único).

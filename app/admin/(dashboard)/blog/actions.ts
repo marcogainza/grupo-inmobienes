@@ -28,9 +28,24 @@ export async function saveBlogPost(formData: FormData) {
   const published = formData.get("published") === "on";
   const slugInput = String(formData.get("slug") ?? "").trim();
   const cover = formData.get("coverImage") as File | null;
+  const categoryIdRaw = String(formData.get("categoryId") ?? "").trim();
+  const newCategoryName = String(formData.get("newCategoryName") ?? "").trim();
 
   if (!title || !excerpt || !content) {
     throw new Error("Faltan campos obligatorios.");
+  }
+
+  // Una categoría nueva escrita a mano tiene prioridad sobre la seleccionada.
+  let categoryId: string | null = null;
+  if (newCategoryName) {
+    const category = await prisma.blogCategory.upsert({
+      where: { name: newCategoryName },
+      update: {},
+      create: { name: newCategoryName },
+    });
+    categoryId = category.id;
+  } else if (categoryIdRaw) {
+    categoryId = categoryIdRaw;
   }
 
   const slug = slugify(slugInput || title);
@@ -42,6 +57,7 @@ export async function saveBlogPost(formData: FormData) {
     excerpt,
     content,
     published,
+    categoryId,
     ...(coverImageUrl ? { coverImageUrl } : {}),
   };
 

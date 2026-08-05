@@ -50,13 +50,14 @@ export default async function BlogListPage() {
                   className="block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md"
                 >
                   {post.coverImageUrl && (
-                    <Image
-                      src={post.coverImageUrl}
-                      alt={post.title}
-                      width={500}
-                      height={260}
-                      className="h-52 w-full object-cover"
-                    />
+                    <div className="relative aspect-square w-full overflow-hidden bg-navy/5">
+                      <Image
+                        src={post.coverImageUrl}
+                        alt={post.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                   )}
                   <div className="p-6">
                     <p className="text-xs text-slate-400">

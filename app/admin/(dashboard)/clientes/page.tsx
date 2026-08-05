@@ -1,4 +1,4 @@
-import { CITIES } from "@/lib/constants";
+import { CITIES, PROPERTY_TYPES } from "@/lib/constants";
 import { prisma } from "@/lib/db";
 import { addCliente, deleteCliente } from "./actions";
 
@@ -87,12 +87,21 @@ export default async function AdminClientesPage() {
           <span className="text-sm font-medium text-slate-700">
             Plan al que se unió
           </span>
-          <input
+          <select
             name="plan"
-            placeholder="Plan casa"
             required
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
-          />
+            defaultValue=""
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
+          >
+            <option value="" disabled>
+              Selecciona un tipo de bien
+            </option>
+            {PROPERTY_TYPES.map((t) => (
+              <option key={t} value={`Plan ${t}`}>
+                Plan {t}
+              </option>
+            ))}
+          </select>
         </label>
         <label className="block">
           <span className="text-sm font-medium text-slate-700">Fecha</span>

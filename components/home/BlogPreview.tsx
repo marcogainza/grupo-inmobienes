@@ -43,7 +43,7 @@ export default function BlogPreview({ posts }: { posts: Post[] }) {
                   href={`/blog/${post.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-lg"
                 >
-                  <div className="relative h-44 w-full shrink-0 overflow-hidden bg-navy/5">
+                  <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-navy/5">
                     {post.coverImageUrl ? (
                       <Image
                         src={post.coverImageUrl}

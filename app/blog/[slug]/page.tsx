@@ -6,6 +6,7 @@ import { prisma } from "@/lib/db";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { renderBlogContent } from "@/lib/sanitize";
 
 export const dynamic = "force-dynamic";
 
@@ -75,13 +76,14 @@ export default async function BlogPostPage({
               alt={post.title}
               width={900}
               height={480}
-              className="mt-8 h-auto w-full rounded-2xl object-cover"
+              className="mx-auto mt-8 h-auto w-full max-w-[30%] min-w-[200px] rounded-2xl object-cover"
             />
           )}
 
-          <div className="mt-8 whitespace-pre-wrap leading-relaxed text-slate-700">
-            {post.content}
-          </div>
+          <div
+            className="prose prose-slate mt-8 max-w-none"
+            dangerouslySetInnerHTML={{ __html: renderBlogContent(post.content) }}
+          />
         </article>
       </main>
       <Footer />

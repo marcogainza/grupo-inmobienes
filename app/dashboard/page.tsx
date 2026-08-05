@@ -81,7 +81,7 @@ export default async function DashboardPage() {
           <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-blue-accent">
             Transparencia total
           </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="gradient-text mt-2 text-4xl font-black tracking-tight md:text-5xl">
             Nuestro Crecimiento en Tiempo Real
           </h1>
           <p className="mx-auto mt-2 max-w-2xl text-slate-600">

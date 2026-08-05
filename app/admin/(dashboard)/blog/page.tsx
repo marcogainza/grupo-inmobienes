@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { prisma } from "@/lib/db";
-import type { BlogPost } from "@prisma/client";
+import type { BlogPost, BlogCategory } from "@prisma/client";
+import RichTextEditor from "@/components/admin/RichTextEditor";
 import { saveBlogPost, deleteBlogPost } from "./actions";
 
-function BlogRow({ p }: { p: BlogPost }) {
+function BlogRow({ p }: { p: BlogPost & { category: BlogCategory | null } }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-slate-200 p-4">
       <div className="flex items-center gap-3">
@@ -25,7 +26,14 @@ function BlogRow({ p }: { p: BlogPost }) {
               </span>
             )}
           </p>
-          <p className="text-xs text-slate-500">/blog/{p.slug}</p>
+          <p className="text-xs text-slate-500">
+            /blog/{p.slug}
+            {p.category && (
+              <span className="ml-2 rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-semibold text-gold-dark">
+                {p.category.name}
+              </span>
+            )}
+          </p>
         </div>
       </div>
       <div className="flex items-center gap-3">
@@ -56,9 +64,15 @@ export default async function AdminBlogPage({
 }) {
   const { edit } = await searchParams;
 
-  const [posts, editing] = await Promise.all([
-    prisma.blogPost.findMany({ orderBy: { publishedAt: "desc" } }),
-    edit ? prisma.blogPost.findUnique({ where: { id: edit } }) : null,
+  const [posts, editing, categories] = await Promise.all([
+    prisma.blogPost.findMany({
+      orderBy: { publishedAt: "desc" },
+      include: { category: true },
+    }),
+    edit
+      ? prisma.blogPost.findUnique({ where: { id: edit } })
+      : null,
+    prisma.blogCategory.findMany({ orderBy: { name: "asc" } }),
   ]);
   const visibles = posts.slice(0, 6);
   const resto = posts.slice(6);
@@ -111,6 +125,36 @@ export default async function AdminBlogPage({
           />
         </label>
 
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block">
+            <span className="text-sm font-medium text-slate-700">
+              Categoría
+            </span>
+            <select
+              name="categoryId"
+              defaultValue={editing?.categoryId ?? ""}
+              className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
+            >
+              <option value="">Sin categoría</option>
+              {categories.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="block">
+            <span className="text-sm font-medium text-slate-700">
+              O crea una categoría nueva
+            </span>
+            <input
+              name="newCategoryName"
+              placeholder="Ej: Consejos financieros"
+              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            />
+          </label>
+        </div>
+
         <label className="block">
           <span className="text-sm font-medium text-slate-700">
             Imagen de portada{" "}
@@ -128,13 +172,7 @@ export default async function AdminBlogPage({
           <span className="text-sm font-medium text-slate-700">
             Contenido
           </span>
-          <textarea
-            name="content"
-            required
-            rows={8}
-            defaultValue={editing?.content ?? ""}
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
-          />
+          <RichTextEditor name="content" defaultValue={editing?.content ?? ""} />
         </label>
 
         <label className="flex items-center gap-2 text-sm text-slate-700">
