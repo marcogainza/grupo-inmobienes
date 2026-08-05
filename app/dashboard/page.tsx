@@ -23,12 +23,6 @@ const dateFmt = new Intl.DateTimeFormat("es-EC", {
   day: "2-digit",
 });
 
-const currency = new Intl.NumberFormat("es-EC", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 0,
-});
-
 function initials(name: string) {
   return name
     .split(" ")
@@ -249,7 +243,7 @@ export default async function DashboardPage() {
             <StatCard
               label="Inmuebles entregados"
               value={stat.inmueblesEntregados}
-              format={(n) => `+${n}`}
+              prefix="+"
               hint="familias adjudicadas"
             />
           </Reveal>
@@ -257,7 +251,7 @@ export default async function DashboardPage() {
             <StatCard
               label="Monto promedio adjudicado"
               value={stat.montoPromedioAdjudicado}
-              format={(n) => currency.format(n)}
+              currency
               hint="por bien inmueble"
             />
           </Reveal>

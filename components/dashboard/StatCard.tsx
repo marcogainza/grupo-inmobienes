@@ -8,13 +8,15 @@ export default function StatCard({
   value,
   hint,
   icon,
-  format,
+  prefix,
+  currency,
 }: {
   label: string;
   value: number;
   hint?: string;
   icon?: string;
-  format?: (n: number) => string;
+  prefix?: string;
+  currency?: boolean;
 }) {
   return (
     <motion.div
@@ -32,7 +34,7 @@ export default function StatCard({
         {icon && <span className="text-lg">{icon}</span>}
       </div>
       <p className="mt-2 text-3xl font-bold text-slate-900">
-        <CountUp value={value} format={format} />
+        <CountUp value={value} prefix={prefix} currency={currency} />
       </p>
       {hint && (
         <p className="mt-1 text-xs font-medium text-blue-accent">{hint}</p>

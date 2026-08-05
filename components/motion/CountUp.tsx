@@ -3,17 +3,24 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView, useMotionValue, useSpring } from "motion/react";
 
+const currencyFmt = new Intl.NumberFormat("es-EC", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
+
 export default function CountUp({
   value,
   prefix = "",
+  currency = false,
   duration = 1.6,
-  format,
   className,
 }: {
   value: number;
   prefix?: string;
+  /** Formatea el número animado como moneda (USD, es-EC) en vez de usar `prefix`. */
+  currency?: boolean;
   duration?: number;
-  format?: (n: number) => string;
   className?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -33,7 +40,7 @@ export default function CountUp({
 
   return (
     <span ref={ref} className={className}>
-      {format ? format(display) : `${prefix}${display}`}
+      {currency ? currencyFmt.format(display) : `${prefix}${display}`}
     </span>
   );
 }
