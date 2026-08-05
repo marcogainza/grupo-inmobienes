@@ -5,6 +5,8 @@ import StatCard from "@/components/dashboard/StatCard";
 import ClientesAfiliadosChart from "@/components/dashboard/ClientesAfiliadosChart";
 import EntregasMensualesChart from "@/components/dashboard/EntregasMensualesChart";
 import ClientesPorCiudadChart from "@/components/dashboard/ClientesPorCiudadChart";
+import Reveal from "@/components/motion/Reveal";
+import Footer from "@/components/Footer";
 import { monthLabel } from "@/lib/dates";
 
 export const metadata = {
@@ -92,137 +94,177 @@ export default async function DashboardPage() {
             Datos actualizados de nuestra operación. Porque en Grupo
             Inmobienes, la confianza se construye con transparencia.
           </p>
+          <span className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-600">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+            </span>
+            En vivo
+          </span>
         </div>
       </header>
 
       <main className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-              Último cliente
-            </p>
-            <div className="mt-3 flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/15 text-sm font-bold text-navy">
-                {ultimoCliente ? initials(ultimoCliente.name) : "—"}
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-slate-900">
-                  {ultimoCliente
-                    ? `${ultimoCliente.name} — ${ultimoCliente.city}`
-                    : "Sin datos"}
-                </p>
-                <p className="flex items-center gap-1 text-xs text-blue-accent">
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-                  Reciente
-                </p>
+          <Reveal>
+            <div className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md">
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                Último cliente
+              </p>
+              <div className="mt-3 flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/15 text-sm font-bold text-navy transition-transform duration-300 group-hover:scale-110">
+                  {ultimoCliente ? initials(ultimoCliente.name) : "—"}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">
+                    {ultimoCliente
+                      ? `${ultimoCliente.name} — ${ultimoCliente.city}`
+                      : "Sin datos"}
+                  </p>
+                  <p className="flex items-center gap-1 text-xs text-blue-accent">
+                    <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
+                    Reciente
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          <StatCard
-            label="Nuevos clientes este mes"
-            value={String(stat.newClientsThisMonth)}
-            hint={`↑ +${stat.newClientsGrowthPct}% vs mes anterior`}
-          />
-          <StatCard
-            label="Bienes entregados"
-            value={String(stat.bienesEntregados)}
-            hint="↑ Actualizando en tiempo real"
-            icon="📦"
-          />
-          <StatCard
-            label="Asambleas ejecutadas"
-            value={String(stat.asambleasEjecutadas)}
-            hint="Grupos de adjudicación completados"
-            icon="🔄"
-          />
+          <Reveal delay={0.05}>
+            <StatCard
+              label="Nuevos clientes este mes"
+              value={stat.newClientsThisMonth}
+              hint={`↑ +${stat.newClientsGrowthPct}% vs mes anterior`}
+            />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <StatCard
+              label="Bienes entregados"
+              value={stat.bienesEntregados}
+              hint="↑ Actualizando en tiempo real"
+              icon="📦"
+            />
+          </Reveal>
+          <Reveal delay={0.15}>
+            <StatCard
+              label="Asambleas ejecutadas"
+              value={stat.asambleasEjecutadas}
+              hint="Grupos de adjudicación completados"
+              icon="🔄"
+            />
+          </Reveal>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p className="text-sm font-semibold text-slate-900">
-              Nuevos clientes
-            </p>
-            <div className="mt-4 space-y-3">
-              {clientes.length === 0 && (
-                <p className="text-sm text-slate-400">Sin datos aún.</p>
-              )}
-              {clientes.map((c) => (
-                <div key={c.id} className="rounded-xl bg-slate-50 p-3">
-                  <p className="text-sm text-slate-700">
-                    {c.name} de {c.city} se unió al {c.plan}
-                  </p>
-                  <p className="mt-1 text-xs text-slate-400">
-                    {dateFmt.format(c.joinedAt)}
-                  </p>
-                </div>
-              ))}
+          <Reveal>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <p className="text-sm font-semibold text-slate-900">
+                Nuevos clientes
+              </p>
+              <div className="mt-4 space-y-3">
+                {clientes.length === 0 && (
+                  <p className="text-sm text-slate-400">Sin datos aún.</p>
+                )}
+                {clientes.map((c) => (
+                  <div
+                    key={c.id}
+                    className="rounded-xl bg-slate-50 p-3 transition-colors duration-300 hover:bg-gold/5"
+                  >
+                    <p className="text-sm text-slate-700">
+                      {c.name} de {c.city} se unió al {c.plan}
+                    </p>
+                    <p className="mt-1 text-xs text-slate-400">
+                      {dateFmt.format(c.joinedAt)}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p className="text-sm font-semibold text-slate-900">
-              Entregas recientes
-            </p>
-            <div className="mt-4 space-y-3">
-              {entregas.length === 0 && (
-                <p className="text-sm text-slate-400">Sin datos aún.</p>
-              )}
-              {entregas.map((e) => (
-                <div key={e.id} className="rounded-xl bg-slate-50 p-3">
-                  <p className="text-sm text-slate-700">
-                    {e.clientName} recibió su {e.propertyType.toLowerCase()}
-                  </p>
-                  <p className="mt-1 text-xs text-slate-400">
-                    {dateFmt.format(e.deliveredAt)}
-                  </p>
-                </div>
-              ))}
+          <Reveal delay={0.1}>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <p className="text-sm font-semibold text-slate-900">
+                Entregas recientes
+              </p>
+              <div className="mt-4 space-y-3">
+                {entregas.length === 0 && (
+                  <p className="text-sm text-slate-400">Sin datos aún.</p>
+                )}
+                {entregas.map((e) => (
+                  <div
+                    key={e.id}
+                    className="rounded-xl bg-slate-50 p-3 transition-colors duration-300 hover:bg-gold/5"
+                  >
+                    <p className="text-sm text-slate-700">
+                      {e.clientName} recibió su{" "}
+                      {e.propertyType.toLowerCase()}
+                    </p>
+                    <p className="mt-1 text-xs text-slate-400">
+                      {dateFmt.format(e.deliveredAt)}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <p className="text-sm font-semibold text-slate-900">
-            Clientes Afiliados — Últimos 12 meses
-          </p>
-          <div className="mt-4">
-            <ClientesAfiliadosChart data={affiliationData} />
+        <Reveal>
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p className="text-sm font-semibold text-slate-900">
+              Clientes Afiliados — Últimos 12 meses
+            </p>
+            <div className="mt-4">
+              <ClientesAfiliadosChart data={affiliationData} />
+            </div>
           </div>
-        </div>
+        </Reveal>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p className="text-sm font-semibold text-slate-900">
-              Entregas mensuales
-            </p>
-            <div className="mt-4">
-              <EntregasMensualesChart data={deliveryData} />
+          <Reveal>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <p className="text-sm font-semibold text-slate-900">
+                Entregas mensuales
+              </p>
+              <div className="mt-4">
+                <EntregasMensualesChart data={deliveryData} />
+              </div>
             </div>
-          </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p className="text-sm font-semibold text-slate-900">
-              Clientes por ciudad
-            </p>
-            <div className="mt-4">
-              <ClientesPorCiudadChart data={cityData} />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <p className="text-sm font-semibold text-slate-900">
+                Clientes por ciudad
+              </p>
+              <div className="mt-4">
+                <ClientesPorCiudadChart data={cityData} />
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <StatCard
-            label="Inmuebles entregados"
-            value={`+${stat.inmueblesEntregados}`}
-            hint="familias adjudicadas"
-          />
-          <StatCard
-            label="Monto promedio adjudicado"
-            value={currency.format(stat.montoPromedioAdjudicado)}
-            hint="por bien inmueble"
-          />
+          <Reveal>
+            <StatCard
+              label="Inmuebles entregados"
+              value={stat.inmueblesEntregados}
+              format={(n) => `+${n}`}
+              hint="familias adjudicadas"
+            />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <StatCard
+              label="Monto promedio adjudicado"
+              value={stat.montoPromedioAdjudicado}
+              format={(n) => currency.format(n)}
+              hint="por bien inmueble"
+            />
+          </Reveal>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }

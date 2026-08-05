@@ -7,11 +7,13 @@ export default function CountUp({
   value,
   prefix = "",
   duration = 1.6,
+  format,
   className,
 }: {
   value: number;
   prefix?: string;
   duration?: number;
+  format?: (n: number) => string;
   className?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -31,8 +33,7 @@ export default function CountUp({
 
   return (
     <span ref={ref} className={className}>
-      {prefix}
-      {display}
+      {format ? format(display) : `${prefix}${display}`}
     </span>
   );
 }

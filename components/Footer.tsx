@@ -61,13 +61,23 @@ export default function Footer() {
             <p className="text-xs font-semibold uppercase tracking-wide text-gold">
               Email
             </p>
-            <p className="mt-1 text-sm">ginmobienes@gmail.com</p>
+            <a
+              href="mailto:ginmobienes@gmail.com"
+              className="mt-1 block text-sm hover:text-gold hover:underline"
+            >
+              ginmobienes@gmail.com
+            </a>
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-gold">
               Teléfono
             </p>
-            <p className="mt-1 text-sm">+593 99 105 2697</p>
+            <a
+              href="tel:+593991052697"
+              className="mt-1 block text-sm hover:text-gold hover:underline"
+            >
+              +593 99 105 2697
+            </a>
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-gold">
