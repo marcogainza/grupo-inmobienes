@@ -21,6 +21,8 @@ const SECURITY_HEADERS = [
 ];
 
 const nextConfig: NextConfig = {
+  // No anunciar la versión de Next.js en el header de respuesta.
+  poweredByHeader: false,
   // Las Server Actions (formularios del CMS que suben fotos) limitan el
   // body a 1MB por defecto. El límite real de la foto es 2MB (ver
   // lib/blob.ts); este valor da margen extra sobre esos 2MB para el resto

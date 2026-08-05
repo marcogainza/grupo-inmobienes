@@ -15,7 +15,9 @@ export const metadata = {
     "Cifras reales de Grupo Inmobienes: familias adjudicadas, entregas mensuales y clientes afiliados por ciudad, actualizadas en tiempo real.",
 };
 
-export const dynamic = "force-dynamic";
+// Estática con revalidación on-demand: dashboard-data/clientes/entregas
+// llaman revalidatePath("/dashboard") en cada cambio, así que sigue
+// mostrando cifras al día sin necesidad de SSR en cada visita.
 
 const dateFmt = new Intl.DateTimeFormat("es-EC", {
   year: "numeric",

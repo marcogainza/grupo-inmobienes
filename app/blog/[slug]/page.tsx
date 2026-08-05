@@ -8,7 +8,9 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { renderBlogContent } from "@/lib/sanitize";
 
-export const dynamic = "force-dynamic";
+// Estática con revalidación on-demand: se genera la primera vez que se
+// visita cada slug y se regenera solo cuando saveBlogPost/deleteBlogPost
+// llama revalidatePath(`/blog/${slug}`).
 
 const dateFmt = new Intl.DateTimeFormat("es-EC", {
   year: "numeric",

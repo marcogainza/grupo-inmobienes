@@ -19,9 +19,10 @@ import BlogPreview from "@/components/home/BlogPreview";
 import Contacto from "@/components/home/Contacto";
 import { MontoProvider } from "@/components/home/MontoContext";
 
-// Se renderiza por request: el contenido editable desde el CMS (entregas,
-// testimonios, cifras) debe reflejarse siempre sin depender del build.
-export const dynamic = "force-dynamic";
+// Página estática con revalidación on-demand: cada Server Action del CMS
+// (entregas, testimonios, blog, clientes, cifras) llama revalidatePath("/")
+// al guardar/borrar, así que no hace falta forzar SSR en cada visita — Next
+// sirve el HTML cacheado y solo lo regenera cuando algo cambia de verdad.
 
 export default async function Home() {
   const [stat, entregas, testimonios, posts] = await Promise.all([

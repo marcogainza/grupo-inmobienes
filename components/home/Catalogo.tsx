@@ -7,11 +7,11 @@ const PHOTOS: Record<string, string> = {
   Casa: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
   Departamento:
     "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80",
-  Terreno: "/terreno-0.png",
+  Terreno: "/terreno-0.jpg",
   "Proyecto inmobiliario":
     "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
   "Local comercial": "/local-2.jpg",
-  Vehículo: "/venucia_2.png",
+  Vehículo: "/venucia_2.jpg",
 };
 
 export default function Catalogo() {

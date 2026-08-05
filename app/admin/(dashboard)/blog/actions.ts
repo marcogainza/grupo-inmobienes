@@ -61,7 +61,15 @@ export async function saveBlogPost(formData: FormData) {
     ...(coverImageUrl ? { coverImageUrl } : {}),
   };
 
+  // Al quitar force-dynamic, /blog/[slug] queda cacheada (ISR on-demand):
+  // hay que revalidar el slug viejo (si cambió al editar) además del nuevo.
+  let previousSlug: string | null = null;
   if (id) {
+    const before = await prisma.blogPost.findUnique({
+      where: { id },
+      select: { slug: true },
+    });
+    previousSlug = before && before.slug !== slug ? before.slug : null;
     await prisma.blogPost.update({ where: { id }, data });
   } else {
     await prisma.blogPost.create({ data });
@@ -69,6 +77,8 @@ export async function saveBlogPost(formData: FormData) {
 
   revalidatePath("/admin/blog");
   revalidatePath("/blog");
+  revalidatePath(`/blog/${slug}`);
+  if (previousSlug) revalidatePath(`/blog/${previousSlug}`);
   revalidatePath("/");
   redirect("/admin/blog");
 }
@@ -77,8 +87,9 @@ export async function deleteBlogPost(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") ?? "");
   if (!id) return;
-  await prisma.blogPost.delete({ where: { id } });
+  const deleted = await prisma.blogPost.delete({ where: { id } });
   revalidatePath("/admin/blog");
   revalidatePath("/blog");
+  revalidatePath(`/blog/${deleted.slug}`);
   revalidatePath("/");
 }

@@ -11,7 +11,8 @@ export const metadata = {
     "Noticias, consejos y novedades sobre el sistema de compra programada de vivienda de Grupo Inmobienes.",
 };
 
-export const dynamic = "force-dynamic";
+// Estática con revalidación on-demand (ver saveBlogPost/deleteBlogPost,
+// que llaman revalidatePath("/blog") en cada cambio).
 
 const dateFmt = new Intl.DateTimeFormat("es-EC", {
   year: "numeric",
