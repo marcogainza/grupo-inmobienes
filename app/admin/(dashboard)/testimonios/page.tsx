@@ -2,6 +2,7 @@ import Image from "next/image";
 import { prisma } from "@/lib/db";
 import type { Testimonio } from "@prisma/client";
 import { PROPERTY_TYPES, CITIES } from "@/lib/constants";
+import ImageFileInput from "@/components/admin/ImageFileInput";
 import { saveTestimonio, deleteTestimonio } from "./actions";
 
 function TestimonioRow({ t }: { t: Testimonio }) {
@@ -130,17 +131,15 @@ export default async function AdminTestimoniosPage({
           </select>
         </label>
 
-        <label className="block">
-          <span className="text-sm font-medium text-slate-700">
-            Foto {editing?.photoUrl ? "(deja vacío para no cambiarla)" : ""}
-          </span>
-          <input
-            type="file"
-            name="photo"
-            accept="image/*"
-            className="mt-1 w-full text-sm"
-          />
-        </label>
+        <ImageFileInput
+          name="photo"
+          label={
+            <>
+              Foto{" "}
+              {editing?.photoUrl ? "(deja vacío para no cambiarla)" : ""}
+            </>
+          }
+        />
 
         <label className="block sm:col-span-2">
           <span className="text-sm font-medium text-slate-700">

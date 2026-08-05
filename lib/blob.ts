@@ -7,7 +7,8 @@ const ALLOWED_MIME_TYPES = new Set([
   "image/webp",
   "image/gif",
 ]);
-const MAX_FILE_SIZE_BYTES = 8 * 1024 * 1024; // 8 MB
+const MAX_FILE_SIZE_MB = 2;
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
 /**
  * Sube una imagen a Vercel Blob. Devuelve null si no se proporcionó archivo
@@ -29,7 +30,9 @@ export async function uploadImage(
     );
   }
   if (file.size > MAX_FILE_SIZE_BYTES) {
-    throw new Error("La imagen supera el tamaño máximo permitido (8 MB).");
+    throw new Error(
+      `La imagen supera el tamaño máximo permitido (${MAX_FILE_SIZE_MB}MB).`
+    );
   }
 
   const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "_");

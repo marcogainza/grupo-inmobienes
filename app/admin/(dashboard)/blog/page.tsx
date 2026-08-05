@@ -2,6 +2,7 @@ import Image from "next/image";
 import { prisma } from "@/lib/db";
 import type { BlogPost, BlogCategory } from "@prisma/client";
 import RichTextEditor from "@/components/admin/RichTextEditor";
+import ImageFileInput from "@/components/admin/ImageFileInput";
 import { saveBlogPost, deleteBlogPost } from "./actions";
 
 function BlogRow({ p }: { p: BlogPost & { category: BlogCategory | null } }) {
@@ -155,18 +156,17 @@ export default async function AdminBlogPage({
           </label>
         </div>
 
-        <label className="block">
-          <span className="text-sm font-medium text-slate-700">
-            Imagen de portada{" "}
-            {editing?.coverImageUrl ? "(deja vacío para no cambiarla)" : ""}
-          </span>
-          <input
-            type="file"
-            name="coverImage"
-            accept="image/*"
-            className="mt-1 w-full text-sm"
-          />
-        </label>
+        <ImageFileInput
+          name="coverImage"
+          label={
+            <>
+              Imagen de portada{" "}
+              {editing?.coverImageUrl
+                ? "(deja vacío para no cambiarla)"
+                : ""}
+            </>
+          }
+        />
 
         <label className="block">
           <span className="text-sm font-medium text-slate-700">

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { prisma } from "@/lib/db";
 import type { Entrega } from "@prisma/client";
 import { PROPERTY_TYPES, CITIES } from "@/lib/constants";
+import ImageFileInput from "@/components/admin/ImageFileInput";
 import { saveEntrega, deleteEntrega } from "./actions";
 
 function toDateInput(d: Date) {
@@ -163,17 +164,15 @@ export default async function AdminEntregasPage({
           />
         </label>
 
-        <label className="block">
-          <span className="text-sm font-medium text-slate-700">
-            Foto {editing?.photoUrl ? "(deja vacío para no cambiarla)" : ""}
-          </span>
-          <input
-            type="file"
-            name="photo"
-            accept="image/*"
-            className="mt-1 w-full text-sm"
-          />
-        </label>
+        <ImageFileInput
+          name="photo"
+          label={
+            <>
+              Foto{" "}
+              {editing?.photoUrl ? "(deja vacío para no cambiarla)" : ""}
+            </>
+          }
+        />
 
         <label className="flex items-center gap-2 text-sm text-slate-700">
           <input
