@@ -1,4 +1,37 @@
-import DOMPurify from "isomorphic-dompurify";
+import sanitizeHtmlLib from "sanitize-html";
+
+const ALLOWED_TAGS = [
+  "p",
+  "br",
+  "strong",
+  "b",
+  "em",
+  "i",
+  "u",
+  "s",
+  "strike",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "ul",
+  "ol",
+  "li",
+  "blockquote",
+  "a",
+  "img",
+  "table",
+  "thead",
+  "tbody",
+  "tr",
+  "th",
+  "td",
+  "hr",
+  "span",
+  "div",
+  "code",
+  "pre",
+];
 
 /**
  * Sanitiza el HTML del contenido de un post antes de renderizarlo con
@@ -6,10 +39,20 @@ import DOMPurify from "isomorphic-dompurify";
  * (autenticado), sanitizamos igual: evita que un XSS accidental en el editor,
  * HTML pegado de una fuente externa, o una sesión de admin comprometida
  * termine ejecutando scripts en el navegador de los visitantes públicos.
+ *
+ * Usamos "sanitize-html" (puro JS, sin DOM) en vez de dompurify/jsdom: jsdom
+ * falla al cargarse como "external module" en el runtime serverless de
+ * Vercel/Turbopack.
  */
 export function sanitizeHtml(html: string): string {
-  return DOMPurify.sanitize(html, {
-    ADD_ATTR: ["target", "rel"],
+  return sanitizeHtmlLib(html, {
+    allowedTags: ALLOWED_TAGS,
+    allowedAttributes: {
+      a: ["href", "target", "rel"],
+      img: ["src", "alt", "width", "height"],
+      "*": ["class"],
+    },
+    allowedSchemes: ["http", "https", "mailto", "tel"],
   });
 }
 
