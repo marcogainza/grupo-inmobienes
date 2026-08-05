@@ -43,7 +43,7 @@ export default async function DashboardPage() {
       prisma.monthlyAffiliation.findMany({ orderBy: { order: "asc" } }),
       prisma.monthlyDelivery.findMany({ orderBy: { order: "asc" } }),
       prisma.cityStat.findMany({ orderBy: { order: "asc" } }),
-      prisma.entrega.findMany({ orderBy: { deliveredAt: "desc" }, take: 3 }),
+      prisma.entrega.findMany({ orderBy: { deliveredAt: "desc" }, take: 6 }),
       prisma.clienteAfiliado.findMany({
         orderBy: { joinedAt: "desc" },
         take: 6,
