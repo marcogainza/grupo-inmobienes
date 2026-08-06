@@ -1,6 +1,6 @@
 "use server";
 
-import { getResendClient, CONTACT_FROM, SALES_NOTIFICATION_EMAIL } from "@/lib/resend";
+import { sendMail, SALES_NOTIFICATION_EMAIL } from "@/lib/smtp";
 import { welcomeClientEmail, leadNotificationEmail } from "@/lib/email-templates";
 
 export type ContactFormState = { success?: boolean; error?: string };
@@ -8,7 +8,7 @@ export type ContactFormState = { success?: boolean; error?: string };
 /**
  * Server Action del formulario de Contacto: valida los datos y dispara los
  * dos correos transaccionales (bienvenida al cliente + notificación de
- * lead al equipo de ventas) vía Resend.
+ * lead al equipo de ventas) vía SMTP (ver lib/smtp.ts).
  */
 export async function sendContactForm(
   _prevState: ContactFormState | undefined,
@@ -35,33 +35,22 @@ export async function sendContactForm(
   const lead = { nombre, correo, telefono, ciudad, monto, mensaje };
 
   try {
-    const resend = getResendClient();
     const clientEmail = welcomeClientEmail(lead);
     const salesEmail = leadNotificationEmail(lead);
 
-    const [clientResult, salesResult] = await Promise.all([
-      resend.emails.send({
-        from: CONTACT_FROM,
+    await Promise.all([
+      sendMail({
         to: correo,
         subject: clientEmail.subject,
         html: clientEmail.html,
       }),
-      resend.emails.send({
-        from: CONTACT_FROM,
+      sendMail({
         to: SALES_NOTIFICATION_EMAIL,
         replyTo: correo,
         subject: salesEmail.subject,
         html: salesEmail.html,
       }),
     ]);
-
-    if (clientResult.error || salesResult.error) {
-      console.error("Resend devolvió error:", clientResult.error, salesResult.error);
-      return {
-        error:
-          "No pudimos confirmar el envío de tu mensaje. Por favor, escríbenos directo por WhatsApp.",
-      };
-    }
 
     return { success: true };
   } catch (err) {
