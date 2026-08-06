@@ -62,10 +62,10 @@ export default function Footer() {
               Email
             </p>
             <a
-              href="mailto:ginmobienes@gmail.com"
+              href="mailto:info@grupoinmobienes.com.ec"
               className="mt-1 block text-sm hover:text-gold hover:underline"
             >
-              ginmobienes@gmail.com
+              info@grupoinmobienes.com.ec
             </a>
           </div>
           <div>
@@ -107,13 +107,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="mt-6 text-center text-[11px] text-slate-600">
+        <p className="mt-6 text-center text-[13px] text-white">
           Diseñado por{" "}
           <a
             href="https://marketing-infinito.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-slate-400 hover:underline"
+            className="hover:text-gold hover:underline"
           >
             Agencia Marketing Infinito ♾️
           </a>

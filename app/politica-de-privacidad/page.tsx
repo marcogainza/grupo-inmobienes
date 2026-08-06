@@ -6,14 +6,14 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 export const metadata: Metadata = {
   title: "Política de Privacidad",
   description:
-    "Política de Privacidad y Protección de Datos Personales de Grupo Inmobienes S.A.",
+    "Política de Privacidad y Protección de Datos Personales de Grupo Inmobienes",
 };
 
 const CLAUSULAS = [
   {
     n: "01",
     title: "Identificación del Responsable",
-    body: `Grupo Inmobienes S.A. (en adelante, "Grupo Inmobienes", "GRUPO INMOBIENES" o "la Compañía"), es una sociedad legalmente constituida en la República del Ecuador, dedicada a la compra programada de inmuebles bajo las modalidades de sorteo o licitación sujeto a normativa de la Superintendencia de Compañías, Valores y Seguros del Ecuador conforme a la Resolución No. SCVS-INC-DNCDN-2024-0010 y su reforma No. SCVS-INC-DNCDN-2024-0017. Grupo Inmobienes actuará como responsable del tratamiento de los datos personales que recopila dentro del desarrollo de sus actividades comerciales, contractuales, administrativas y de marketing. Grupo Inmobienes podrá actuar directamente o a través de terceros encargados del tratamiento, garantizando en todo momento el cumplimiento de la Ley Orgánica de Protección de Datos Personales, su reglamento y demás normativa aplicable.`,
+    body: `Grupo Inmobienes (en adelante, "Grupo Inmobienes", "GRUPO INMOBIENES" o "la Compañía"), es una sociedad legalmente constituida en la República del Ecuador, dedicada a la compra programada de inmuebles bajo las modalidades de sorteo o licitación sujeto a normativa de la Superintendencia de Compañías, Valores y Seguros del Ecuador conforme a la Resolución No. SCVS-INC-DNCDN-2024-0010 y su reforma No. SCVS-INC-DNCDN-2024-0017. Grupo Inmobienes actuará como responsable del tratamiento de los datos personales que recopila dentro del desarrollo de sus actividades comerciales, contractuales, administrativas y de marketing. Grupo Inmobienes podrá actuar directamente o a través de terceros encargados del tratamiento, garantizando en todo momento el cumplimiento de la Ley Orgánica de Protección de Datos Personales, su reglamento y demás normativa aplicable.`,
   },
   {
     n: "02",
@@ -83,17 +83,17 @@ const CLAUSULAS = [
   {
     n: "15",
     title: "Canales de Contacto",
-    body: `Para el ejercicio de sus derechos, la atención de consultas, solicitudes, reclamos o cualquier comunicación relacionada con la presente Política de Privacidad y Protección de Datos Personales, el titular podrá contactar a Grupo Inmobienes a través de sus canales oficiales de atención, los cuales se encuentran habilitados para la recepción, gestión y respuesta de requerimientos conforme a la normativa vigente en materia de protección de datos personales.\n\nCorreo electrónico: ginmobienes@gmail.com\n\nGrupo Inmobienes atenderá su solicitud dentro del término de 15 días contados a partir de la recepción de la solicitud en el correo electrónico antes establecido. La solicitud deberá tener al menos lo siguiente: a) Nombres y apellidos; b) Cédula de identidad; c) Descripción clara y detallada de los hechos que fundamentan la solicitud; d) correo para notificaciones; e) Petición concreta; f) firma electrónica del titular. En caso de ser necesario, Grupo Inmobienes requerirá al interesado dentro de los tres (3) días siguientes a la recepción del reclamo para que aporte documentos adicionales, en los casos en que resulte incompleta la solicitud. Si dentro de los treinta (30) días siguientes a la fecha del requerimiento el solicitante no presenta la información requerida, se entenderá que el titular ha desistido de la solicitud y se le enviará una constancia de los hechos sucedidos, sin perjuicio de la posibilidad de volver a ejercer sus derechos.`,
+    body: `Para el ejercicio de sus derechos, la atención de consultas, solicitudes, reclamos o cualquier comunicación relacionada con la presente Política de Privacidad y Protección de Datos Personales, el titular podrá contactar a Grupo Inmobienes a través de sus canales oficiales de atención, los cuales se encuentran habilitados para la recepción, gestión y respuesta de requerimientos conforme a la normativa vigente en materia de protección de datos personales.\n\nCorreo electrónico: info@grupoinmobienes.com.ec\n\nGrupo Inmobienes atenderá su solicitud dentro del término de 15 días contados a partir de la recepción de la solicitud en el correo electrónico antes establecido. La solicitud deberá tener al menos lo siguiente: a) Nombres y apellidos; b) Cédula de identidad; c) Descripción clara y detallada de los hechos que fundamentan la solicitud; d) correo para notificaciones; e) Petición concreta; f) firma electrónica del titular. En caso de ser necesario, Grupo Inmobienes requerirá al interesado dentro de los tres (3) días siguientes a la recepción del reclamo para que aporte documentos adicionales, en los casos en que resulte incompleta la solicitud. Si dentro de los treinta (30) días siguientes a la fecha del requerimiento el solicitante no presenta la información requerida, se entenderá que el titular ha desistido de la solicitud y se le enviará una constancia de los hechos sucedidos, sin perjuicio de la posibilidad de volver a ejercer sus derechos.`,
   },
   {
     n: "16",
     title: "Controversias",
-    body: `Grupo Inmobienes S.A. y los usuarios que acepten la presente Política se someten al cumplimiento de las normas legales del Estado Ecuatoriano y acuerdan que cualquier diferencia que surgiere respecto al presente documento será sometida a mediación y, en caso de que escalare, será sometida a las autoridades y jueces de la ciudad de Guayaquil. Además, aceptan ser citados telemáticamente al correo proporcionado por el titular en el formulario.`,
+    body: `Grupo Inmobienes y los usuarios que acepten la presente Política se someten al cumplimiento de las normas legales del Estado Ecuatoriano y acuerdan que cualquier diferencia que surgiere respecto al presente documento será sometida a mediación y, en caso de que escalare, será sometida a las autoridades y jueces de la ciudad de Guayaquil. Además, aceptan ser citados telemáticamente al correo proporcionado por el titular en el formulario.`,
   },
   {
     n: "17",
     title: "Declaraciones",
-    body: `El titular que acepta esta Política de Privacidad y tratamiento de datos personales declara que entiende el servicio prestado por Grupo Inmobienes S.A., esto es, la compra programada de inmuebles bajo la modalidad de sorteo o licitación; es decir, Grupo Inmobienes S.A. no otorga créditos, no es financiera. El inmueble que el titular detalle en el formulario únicamente es referencial y no genera obligación alguna a Grupo Inmobienes S.A. de entregarlo, y no crea relación comercial alguna hasta la suscripción formal del contrato de gestión de compra programada, cuyo objeto únicamente es la intermediación para la adquisición de un inmueble que es elegido por el titular en caso de ser adjudicado bajo las modalidades antes mencionadas.`,
+    body: `El titular que acepta esta Política de Privacidad y tratamiento de datos personales declara que entiende el servicio prestado por Grupo Inmobienes, esto es, la compra programada de inmuebles bajo la modalidad de sorteo o licitación; es decir, Grupo Inmobienes no otorga créditos, no es financiera. El inmueble que el titular detalle en el formulario únicamente es referencial y no genera obligación alguna a Grupo Inmobienes de entregarlo, y no crea relación comercial alguna hasta la suscripción formal del contrato de gestión de compra programada, cuyo objeto únicamente es la intermediación para la adquisición de un inmueble que es elegido por el titular en caso de ser adjudicado bajo las modalidades antes mencionadas.`,
   },
   {
     n: "18",
@@ -116,7 +116,7 @@ export default function PoliticaPrivacidadPage() {
           </h1>
           <p className="mt-4 text-slate-600">
             Política de Privacidad y Protección de Datos Personales de Grupo
-            Inmobienes S.A.
+            Inmobienes
           </p>
 
           <div className="mt-10 space-y-8">
@@ -140,9 +140,9 @@ export default function PoliticaPrivacidadPage() {
             <p className="mt-1">
               Para ejercer cualquiera de tus derechos ARCO+P, consultar esta
               política o presentar una solicitud, comunícate directamente con
-              Grupo Inmobienes S.A.
+              Grupo Inmobienes
             </p>
-            <p className="mt-3">✉️ ginmobienes@gmail.com</p>
+            <p className="mt-3">✉️ info@grupoinmobienes.com.ec</p>
             <p>💬 WhatsApp +593 99 105 2697</p>
           </div>
         </div>

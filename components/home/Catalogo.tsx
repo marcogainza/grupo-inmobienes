@@ -11,7 +11,7 @@ const PHOTOS: Record<string, string> = {
   "Proyecto inmobiliario":
     "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
   "Local comercial": "/local-2.jpg",
-  Vehículo: "/venucia_2.jpg",
+  Oficina: "/consultorio1.png",
 };
 
 export default function Catalogo() {

@@ -171,7 +171,7 @@ export default function FaqPage() {
               explicarte a detalle las ventajas de nuestro modelo comercial.
             </p>
             <p className="mt-3">💬 WhatsApp +593 99 105 2697</p>
-            <p>✉️ ginmobienes@gmail.com</p>
+            <p>✉️ info@grupoinmobienes.com.ec</p>
           </div>
         </div>
       </main>

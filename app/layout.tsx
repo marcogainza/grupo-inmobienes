@@ -80,7 +80,7 @@ const organizationJsonLd = {
     },
   ],
   telephone: "+593991052697",
-  email: "ginmobienes@gmail.com",
+  email: "info@grupoinmobienes.com.ec",
   sameAs: [
     "https://instagram.com/inmo_bienes_ec",
     "https://tiktok.com/@inmobienesec",

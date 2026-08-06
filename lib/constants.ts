@@ -4,7 +4,7 @@ export const PROPERTY_TYPES = [
   "Terreno",
   "Proyecto inmobiliario",
   "Local comercial",
-  "Vehículo",
+  "Oficina",
 ] as const;
 
 export const CITIES = [
