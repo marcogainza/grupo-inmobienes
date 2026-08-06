@@ -1,18 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState } from "react";
 import SectionEyebrow from "./SectionEyebrow";
 import { CITIES } from "@/lib/constants";
 import { useMonto } from "./MontoContext";
+import { sendContactForm } from "@/app/actions/contact";
 
 export default function Contacto() {
-  const [enviado, setEnviado] = useState(false);
   const { monto } = useMonto();
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setEnviado(true);
-  }
+  const [state, formAction, pending] = useActionState(sendContactForm, {});
 
   return (
     <section id="contacto" className="bg-white py-20">
@@ -28,7 +24,7 @@ export default function Contacto() {
           </p>
         </div>
 
-        {enviado ? (
+        {state.success ? (
           <div className="mt-10 rounded-2xl border border-gold/30 bg-gold/10 p-8 text-center">
             <p className="text-lg font-semibold text-navy">
               ¡Gracias! Hemos recibido tu mensaje.
@@ -39,7 +35,7 @@ export default function Contacto() {
           </div>
         ) : (
           <form
-            onSubmit={handleSubmit}
+            action={formAction}
             className="mt-10 space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-8"
           >
             {monto !== null && (
@@ -50,12 +46,14 @@ export default function Contacto() {
             <div className="grid gap-4 sm:grid-cols-2">
               <input
                 required
+                name="nombre"
                 type="text"
                 placeholder="Nombre completo"
                 className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               />
               <input
                 required
+                name="correo"
                 type="email"
                 placeholder="Correo electrónico"
                 className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
@@ -64,12 +62,14 @@ export default function Contacto() {
             <div className="grid gap-4 sm:grid-cols-2">
               <input
                 required
+                name="telefono"
                 type="tel"
                 placeholder="Teléfono"
                 className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               />
               <select
                 required
+                name="ciudad"
                 defaultValue=""
                 className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
               >
@@ -92,12 +92,13 @@ export default function Contacto() {
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
             />
             <textarea
+              name="mensaje"
               placeholder="Mensaje"
               rows={4}
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
             />
             <label className="flex items-start gap-2 text-xs text-slate-500">
-              <input required type="checkbox" className="mt-0.5" />
+              <input required type="checkbox" name="acepta" className="mt-0.5" />
               He leído y acepto las{" "}
               <a
                 href="/politica-de-privacidad"
@@ -116,11 +117,17 @@ export default function Contacto() {
               </a>
               .
             </label>
+
+            {state.error && (
+              <p className="text-sm font-medium text-red-600">{state.error}</p>
+            )}
+
             <button
               type="submit"
-              className="w-full rounded-full bg-gold px-6 py-3 text-sm font-semibold text-white transition hover:scale-[1.02] hover:bg-gold-dark"
+              disabled={pending}
+              className="w-full rounded-full bg-gold px-6 py-3 text-sm font-semibold text-white transition hover:scale-[1.02] hover:bg-gold-dark disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
             >
-              Enviar mensaje
+              {pending ? "Enviando…" : "Enviar mensaje"}
             </button>
           </form>
         )}
