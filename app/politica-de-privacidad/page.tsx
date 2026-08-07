@@ -128,7 +128,7 @@ export default function PoliticaPrivacidadPage() {
                 <h2 className="mt-1 text-lg font-bold text-slate-900">
                   {c.title}
                 </h2>
-                <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 whitespace-pre-line text-justify text-sm leading-relaxed text-slate-600">
                   {c.body}
                 </p>
               </div>

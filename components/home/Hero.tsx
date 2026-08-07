@@ -42,7 +42,7 @@ const SLIDES: Slide[] = [
     images: [
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80",
-      "/venucia.jpg",
+      "/cocina.jpg",
     ],
   },
   {
